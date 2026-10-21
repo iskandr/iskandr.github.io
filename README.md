@@ -11,11 +11,31 @@ required. To preview locally:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open <http://localhost:8000/>. GitHub Pages serves `404.html` for missing routes;
-Python’s simple server does not. The custom error page sends known old PHP URLs
-to the corresponding static pages with JavaScript, preserving query strings and
-fragments. These redirects initially receive HTTP 404 rather than a server-side
-301. Navigation links remain available without JavaScript.
+Open <http://localhost:8000/>. The [full archive](https://iskandr.github.io/archive.html)
+links to the original writing, presentations, teaching materials, and downloads.
+Static directory indexes preserve the old Apache browsing URLs, including
+`/files/`, `/images/`, `/text/`, and the computational photography results folders.
+
+Dedicated redirect pages preserve the historical PHP, top-level article, and
+`/writing/` URLs. PHP-style paths are static directories: the server adds a
+trailing slash, then the HTML page redirects to the current destination.
+JavaScript preserves query strings and fragments; a meta refresh and a link also
+work without JavaScript. `404.html` retains a fallback for these known old URLs.
+The legacy PDF URLs `/writing/RR_deriv.pdf` and `/hps/RR_deriv.pdf` serve the PDF
+bytes directly. Historical CSS and sea-cow image paths are restored from Git.
+
+Run the preservation audit after changes:
+
+```sh
+python3 scripts/check_archive.py
+```
+
+`migration-manifest.json` records 206 preserved asset hashes (197 matching the old
+live server and 9 restored assets or PDF aliases), 24 original content pages,
+13 legacy redirects, and 8 directory listings. The audit also checks internal
+links, fragments, and sitemap targets. If intentionally replacing a download,
+update its recorded hash alongside that change. External blogs stay on their
+original hosts; their links are retained.
 
 The previous Jekyll starter site remains in this repository’s Git history.
 

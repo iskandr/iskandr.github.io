@@ -1,0 +1,895 @@
+{
+  "source_commit": "60e58fe37e1deab5a0969410a8f5b9ec2159879a",
+  "assets": {
+    "comp_photo/JoinersCode.tar.gz": {
+      "sha256": "ec64606ae1c9c7b162ce98eacab92a9f90a8682925fa1838a439cfcdc48c0836",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/demosaic.m": {
+      "sha256": "2ffc922c6ea9be51da9ae483dea1f57f0b2e742c236b00e4965a72f35fe871dc",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/final.jpg": {
+      "sha256": "5a02dd5801be5eb605dead63b87fff867285754c77b88ba786746838752b658a",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/final_hist.jpg": {
+      "sha256": "32a76b3d2fb7c9f06857a50614636f28431f2332c08d5b9b2f336af6870553d0",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/final_no_gamma.jpg": {
+      "sha256": "05e0fd703e8a46d5db41549b9a6060db577e85a59e0d528c652081b8a82bf48c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/gamma.jpg": {
+      "sha256": "baab9232d9fb25524cc4f253721c1cfc3a1de50119d7151a63f3a736196e2ce1",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/gamma_correct.m": {
+      "sha256": "999a79cfdf864519a009f879368b1c21458811f662aa815b839d0727044c2fe6",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/gamma_hist.jpg": {
+      "sha256": "884adff3eb5cdf6f588de1aa1fbdf09eb9a88b2e43ac134dd3ef9dd7dc07fd31",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/gsolve.m": {
+      "sha256": "7c539b1dde2b5d987bdaa112ab46017090cd5d8358e9c9d8189238740a6ebc5b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/hdr_blue.jpg": {
+      "sha256": "8ac95170c4cdc8d1d3abde4b88e24e7d217cedb5a84c7776da424337f7ce6588",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/hdr_blue_gamma.jpg": {
+      "sha256": "1acf061f16912345576a0846d37ae666fa8dedaa2fd71cf84f34a8145f19b80b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/hdr_green.jpg": {
+      "sha256": "77fa0727cf8e6f62f2aff454baa3b28cb7f8849101aabe9d9aacd5c432d6e59e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/hdr_green_gamma.jpg": {
+      "sha256": "cce57738ecd87b3d8645b69414a76bab43cc71420202eeb27658f38736c6ec8f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/hdr_red.jpg": {
+      "sha256": "e263dfaf3f3d0f75d125497715d6c63643d3c936e11fd5f53283e7d90e4bff67",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/hdr_red_gamma.jpg": {
+      "sha256": "93f7467bc08323d101132b54a4401ac577de1eb8d1d46cee418a8b0a2a9e92b9",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/histoclip.m": {
+      "sha256": "36d8596e2b345b511856c21bda594f6ddf171df37b6340c62a3de7a001aaee41",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/raw.jpg": {
+      "sha256": "dc38443c0ce7f7cc80cbda4b1e80aa45e14bdc845998d4cf70093dfe2ded01b4",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/raw2jpg.m": {
+      "sha256": "38cebbaf65287c462f6ee461fc40af23a24523be0243955d4d28315d3bc31442",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/rgb.jpg": {
+      "sha256": "54238a5ede76b52ea3ab1dc5426b4f0025c754ab7d52721bc6d61b6268c10294",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/rgb_med.jpg": {
+      "sha256": "7a0731706081363cb6ba0ec22b6777b71544526a2a1ebcbe97e969a802f130da",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/tonemap.m": {
+      "sha256": "cbaa34306abb33b7cfba0f931073fdcc6313181b501edaba57f239299575647e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/white.jpg": {
+      "sha256": "40695775c6d08cbba18280563147f0a3a34dd2ae0b590f8dab24f2cc7148132b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw1/white_balance.m": {
+      "sha256": "9dca297fcd162d27c2ee855dc1d0f635e40c3d9cf629e47a4b1055e6af7eb4ea",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/blend.jpg": {
+      "sha256": "48a98c0409509af6383b355d83b64429c412f81415b41aa82094fcdffe802298",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/blend.m": {
+      "sha256": "71785bc11ef1f47dc638a616cceeef5f330e242d4f59d4b708dc00b00f20e067",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/blend_driver.m": {
+      "sha256": "55140495925efe11bf33199942a100facedc92edb75b3157bf94073bcd919513",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/clownface_small.jpg": {
+      "sha256": "254e464e7c653c2cbf627ecb117c62c052ec34c107ee474e0721ac48395649de",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/convtest.jpg": {
+      "sha256": "10bb3f42402fc748ad638bf07e4e2a18ef4b67dd033d20f2272b4f4d654e70ab",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/convtest.m": {
+      "sha256": "e3f8c4c4fff8d157ab3417068a3851f79307160d8ca97e0e1a6b526d09fff789",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/denoise.m": {
+      "sha256": "1e8e13e63dcf337f9edc5ca3de6061a391d2c9b5051817c820a89924d832fcaf",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/einstein_coring.jpg": {
+      "sha256": "6bb43c9eb228e01699b30086ee37868e44b712794664d7820a74dee56f28bd52",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/einstein_noise.jpg": {
+      "sha256": "f705272a3fd74d7621c18b9429a2b20881ba5f8c8fa8ad88abbc013f68722c7d",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/einstein_original.jpg": {
+      "sha256": "6905a18734919150626c726a1025da78f8754028eb849d50a898924cfcbe7579",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/einstein_wiener.jpg": {
+      "sha256": "dc97a4d426b6331325e756bf141a90da4fd59648fd4ff3ec1452c7f08ed8605c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/estimator.jpg": {
+      "sha256": "e771076e2168bd4dad485eff75b7c882557ecaac6fd5fa69abcb0f532498ee72",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/estimator1.jpg": {
+      "sha256": "1e124ab0bd7a8d367b5a41130aa842e429913131a168ddd21d7b0abcb9386ce4",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/estimator2.jpg": {
+      "sha256": "9ec5528043daf6d97aebc52b95a686f7cbeda920e992ce8857ca74d700d65d22",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/estimator3.jpg": {
+      "sha256": "9bf54590abf4d4a0643144a91f55ab8e933d37601b9b105fd1dbbeb5526fff8b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/estimator4.jpg": {
+      "sha256": "c27ea4199e0db693886f1b2066fab22ea686d5158471c7b331b2e8887ff8c3d7",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/estimator5.jpg": {
+      "sha256": "4e8874109f40ec0a969a56ee746b98de197b38b52e31d150f0f5605272f5c7ac",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/hw2/japanese3.jpg": {
+      "sha256": "a1902dd52bbfc13e9e82d8cf718a58ca27e911dba932ae63fd3efacbf84060e8",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/D20.png": {
+      "sha256": "88a08f3f051b29e9fc78cfc616844f80f0b189f201bf1acd9c4fad35f5bbcc8c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/D20_gray.jpg": {
+      "sha256": "84bf95ffdac30dd55115fe534c12a02a57977e4e0ef02dc160879bf6fa34f774",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/EM_GM.m": {
+      "sha256": "ccb20276eef0ace6b53d580d57bd816691a841ee7145796c86240a80083101ef",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/african_face1.jpg": {
+      "sha256": "ca16091602d23a9097aaac49d311537ac274abe78e308a2ecbd7d4746d818972",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/african_face1_gray.jpg": {
+      "sha256": "63097d86f643c69974d0d7d43dbec4ab3e9947bf32cebfadad9bfd9f7ba2bd53",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/bw_wood2.jpg": {
+      "sha256": "0ac5104a2fa1756603a2dde981d06a4bc47b04adbd22ecb408d48f5e69de42e7",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/bw_wood2_gray.jpg": {
+      "sha256": "a0c9853e3aa9e237f4534127084f4d9567cd9a02c66ff3d6500d55810f23b6b2",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/call3.jpg": {
+      "sha256": "a037835a52f0226c80e51c61e91ee13d7ac37fc8040261ceef71ef6ee9deb0b8",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/call3_gray.jpg": {
+      "sha256": "92e13e6223c383c1482d8c694e8bfd3f3a746984786db0157436a0ad8dce1b3a",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/chat_small.bmp": {
+      "sha256": "0283be34390a71d0195be9ea8f72ac19557cdf5c41caacd2de39563e73f1eb2d",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/cheetah.jpg": {
+      "sha256": "a4fd6037e46ff721b5e5ac8c4cd398a41677ca153d1906029978b86c8f844c92",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/cheetah_gray.jpg": {
+      "sha256": "691a51bf510d567e3f7ee7e92073154fecb65d29fcffde786711a587cbe1be36",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/chinese.bmp": {
+      "sha256": "d4ffa1927c2f55dd79829f060655db7d1c21682a604f5565d6c5d23c9a56773c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/chinese_gray.jpg": {
+      "sha256": "0d8cd621d5ee1789027343575aaa995d418521c353548825b8a35ac406745609",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/efros_small2.jpg": {
+      "sha256": "be0d435cae1ed118d5fcfb80cd768aa02d4f3ada3875179e75a95e682f696ba6",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/fire.jpg": {
+      "sha256": "5e3028fae4af4e1cf51020f865cbb837cb173f19e5e7d5e5c00c33277693b24b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/D20_11.jpg": {
+      "sha256": "f0d00eee6b31b09e5be717c51256e0e05177563cdfc719150250640bc8495a46",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/D20_3.jpg": {
+      "sha256": "02c8d9b8cac251b02582de589960e8d2201ded3da34ec1a969911495340f37e1",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/D20_5.jpg": {
+      "sha256": "bab6b9cd2577c44105f2c143b182a6ec1d22c95b55a8d7192f431042976fae8f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/D20_7.jpg": {
+      "sha256": "1fde1dc8a363a1713f69a1c63406fec8f293de0f24344ae41a9705695e782afb",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/african_face1_3.jpg": {
+      "sha256": "619e8131eeae133a9b53e0c5269ffdb72cb1698ec3fa270327fd3b23162c5bbb",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/african_face1_5.jpg": {
+      "sha256": "5498b6a3c31a50550aec5fa7533457018127b371c87381c35283b414b9f8da07",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/african_face1_7.jpg": {
+      "sha256": "ad2013a3a0764f9796bc981dd9ee156706bff7d3f60f3cb56a99d9b34c452b6d",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/bw_wood2_3.jpg": {
+      "sha256": "2b842889bc102edf62ac09fa9bd4ae307656139f29a61cb752ac972664d07119",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/bw_wood2_5.jpg": {
+      "sha256": "6b3641b7ed5bad2335428f23d0728002ccdb2bf3abcc7ec7f577115b9427ba7c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/bw_wood2_7.jpg": {
+      "sha256": "28293adf0c5a04f716140f690b76b9f4bce160e5d23b66a5416064b639c23e70",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/call3_3.jpg": {
+      "sha256": "39eecef8fde78943eb218a07ac22571250a5b91b04b624a24d00bd9b8bdd773f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/call3_5.jpg": {
+      "sha256": "59a86e2273434248706c1bad54589e4cc00a27a4a21827cab2eccc2b4acebe4f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/call3_7.jpg": {
+      "sha256": "a1b6ab6f6a5d634d517d5f2bf020566e421a6ae54313681bd001a7e35b171ff0",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/cheetah_3.jpg": {
+      "sha256": "1ae06c76fa03fa7d51050b592f995a4d7e0fcd3ada77a38ae8149849dac0a83b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/cheetah_5.jpg": {
+      "sha256": "4a3a979bc36d7192176afa513298e814d5758a1b0a8fbcb8782aaa117ad9dda1",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/cheetah_7.jpg": {
+      "sha256": "0aaafa39c9311890e5b1e3697dbd45ded1d1ddcb1f9e69358bdc4a2a9cd900c0",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/chinese_3.jpg": {
+      "sha256": "0ea33aa1d1c7e352c973e7b200002f9f92d9bafe21b867d6fe03a6a99002b19b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/chinese_5.jpg": {
+      "sha256": "23f1d573eea76f5d4c2ec7e194a56b1382dc92770c1caac6b04925591ddee8db",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/chinese_7.jpg": {
+      "sha256": "a81b90b04f5b70af0d44c4cb94d14130dc5410e8098a5c2fcc1ec24ff36ec811",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/metal_small_11.jpg": {
+      "sha256": "f87e41e682bed921909a840f820e608254be4872152476de38d4b5d82ae0c27c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/metal_small_3.jpg": {
+      "sha256": "f54ed214241a844f572d1bc68bf1a6595f991368423b80f7555efef48b8e280b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/metal_small_5.jpg": {
+      "sha256": "72f2f459de7c0f9164bf1bc80643723833b69f3f11c428414348e74bc1862731",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/gmm_results/metal_small_7.jpg": {
+      "sha256": "a6390ca59dcbedeaa0808df1497f35deb1ad68716b25806cd198aaa819281ff8",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/metal_small.bmp": {
+      "sha256": "c2d71ba64dbfbf97007da883483e90c437d6cbe7520ea603677f8ca663bba50c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/metal_small_gray.jpg": {
+      "sha256": "501444fc82b2872740255f95475db86b7a0a4d0cbae1925875eafc5071cbf8c5",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/D20_11.jpg": {
+      "sha256": "0e29c3bae96203a7b96f523346a7c6d43a08019601d6424978a60b633cfe7684",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/D20_15.jpg": {
+      "sha256": "57cacbea72c596c35adc5746c73ca4b17b1fd5901467c632f4dd5457ec2ce00c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/D20_19.jpg": {
+      "sha256": "80194b3aa06c7c58a666145befa9c47855ff40f3520e132df593db9c86ec14ab",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/D20_3.jpg": {
+      "sha256": "cbb674e0db25b185fe8c67a49a9c050069b78a6d50141342853d30338fba905e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/D20_5.jpg": {
+      "sha256": "ad564028f13889a6764c7f357ce8391aeddb49dfbdd4588ef6632d2427f83262",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/D20_7.jpg": {
+      "sha256": "785e00177f0f9c1c83257aad07ce006c534df59f6365fe81eaa053bce82e7803",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/african_face1_11.jpg": {
+      "sha256": "f4c36bfd764bafaa7987acc27c26da425555d995860ee03fc8af2de33f138e38",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/african_face1_15.jpg": {
+      "sha256": "31dfa6072e6cf3e41c1ad5c76e28e977673c81e5fb3198c55eb072dc19eb31ae",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/african_face1_19.jpg": {
+      "sha256": "e475887b885601a7b95e4a32aa319020eed05bd39f2b622ed619f38cc8832a48",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/african_face1_3.jpg": {
+      "sha256": "54f8721d1524a5df20e7edb97aa4db477b821e3153edacac7e77f5639139e63e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/african_face1_5.jpg": {
+      "sha256": "7d77e4233371d490cfe7b5a1a768fe33ce635337cb20dca46e897f616d991d6f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/african_face1_7.jpg": {
+      "sha256": "e3c2c43576ce00724fa91e4ae183705c0e4c1045763d40e40705e9298e2054a7",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/bw_wood2_11.jpg": {
+      "sha256": "1a55031dd54abc275dcf6d1b090bf610141577c4d972f815966c5c0cf34ed9ec",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/bw_wood2_15.jpg": {
+      "sha256": "982af5c2525892a2206b33af7182f5a8af0c02e871da7fbbad8873327b6ce81b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/bw_wood2_19.jpg": {
+      "sha256": "d108270b355708f076979d67f8fbbd942e5cd2adb19a5abfe24bd59315de6509",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/bw_wood2_3.jpg": {
+      "sha256": "e818afead279b4181016a048abbecb3fddc8e9d8dd16af605db237d1b2cbdf2c",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/bw_wood2_5.jpg": {
+      "sha256": "4b1d4c46bcb95ac1dad6c255444b4d92053fd2404e3fc170f66fc7b6f8e3f340",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/bw_wood2_7.jpg": {
+      "sha256": "2cc3784dc999376ef07e4d2c9ee4a51494a3a8a52e583cbc8626173475fef9a9",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/call3_11.jpg": {
+      "sha256": "d1748e09e1d6f162948e7771e57603530e5705256335c16fe80bef8df7e61901",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/call3_15.jpg": {
+      "sha256": "2a883cae92dc8975ab3cff3595ae75e21c904f002b35c1005a1a0a27894bd67f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/call3_19.jpg": {
+      "sha256": "fcf373d171f6940baa8562b29c1a54a645909cbe490fd4df2634d097b64743ac",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/call3_3.jpg": {
+      "sha256": "cc5b80e7b627c57940a139ca2a02c1a1e114fc8bb6427021e216e16a0be63d3e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/call3_5.jpg": {
+      "sha256": "b136fbcff23eebf8006d1059a184682b53c318119cbd5ba5901577f867107ce1",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/call3_7.jpg": {
+      "sha256": "8416fb920969f239994159901be362273ea32202b16cfbbbe54b891f38e6c7ff",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chat_small_11.jpg": {
+      "sha256": "708d2749abf1954b91a5d58b76bfb060d057b12ee08d61c8c817403d748dfd9a",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chat_small_15.jpg": {
+      "sha256": "b58291a542ccb66cbfc5f7d07b8d8ee684c2e964bb01a58dfbd67fc6254269d3",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chat_small_5.jpg": {
+      "sha256": "04cee924deb65f6f79987c0f9a6793ba86a1223b5128bbc3fe3b150c22c0ca32",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chat_small_7.jpg": {
+      "sha256": "8af5093c5d704a77cdbc0271845776791d999a990cb6718f78b2d0e1679c541b",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/cheetah_11.jpg": {
+      "sha256": "e6aff34ac4affffc9cd61904ac44bcac55c4b0708a0cbb20aa85390e18f80d68",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/cheetah_15.jpg": {
+      "sha256": "ddb7532be2b37077f1c2b62dca48719437e489a6a1328b9370d0419d318d1c3f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/cheetah_19.jpg": {
+      "sha256": "6d0bd2a49250ce4733c7a6585040a6b77aab4f8c6ab924e23800f6b6655d8a3a",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/cheetah_3.jpg": {
+      "sha256": "4884bd9e95e1ac160a59fed4644ff97d6ca541265fb0a62277caae1465841635",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/cheetah_5.jpg": {
+      "sha256": "abf3c6bd9f9d5126479c8a9c03c9499a30f26c000aa1b561df5c1c8cfa578de2",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/cheetah_7.jpg": {
+      "sha256": "a3744c8b663ef02ab1605cf1d72fc5117edae60e5fffe8045f2aa4f1563b1c62",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chinese_11.jpg": {
+      "sha256": "9d0ef4f7600113edf5b9dfd2e0ce91f59bf83f552908d36cac73d55f869be4ea",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chinese_15.jpg": {
+      "sha256": "dd43e05ee3094b183acf9fcfe9efa56034d8c426ee48010e32bfd8d54c3a7be1",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chinese_19.jpg": {
+      "sha256": "6c11006831528e37d10ba77ea73efcf84c5379b73cf43972c3037d91d594f318",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chinese_3.jpg": {
+      "sha256": "489574ffe380a2c005f87350d3edc5f56aff90e35058f4b1fe2f5b9e3159c96e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chinese_5.jpg": {
+      "sha256": "e1311afaf9470642584e747fd1610600457c65512022fc42e9ecd05800644cd7",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/chinese_7.jpg": {
+      "sha256": "cff061c0446ff3c8d0161dcd56975e372c9fce2b77e702ad5aae0327859f4d46",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/efros_small2_11.jpg": {
+      "sha256": "ffa86943bf12b46d6331e2ad804e24ddcdf1953d3e0774559b3a91ead2eaf692",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/efros_small2_15.jpg": {
+      "sha256": "0c16e0feaaa04caefa35a19367e67b19ad49b134a802ce0016e38c9bb29eccc8",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/efros_small2_5.jpg": {
+      "sha256": "b0ea192151ef90002a62c1031c1236d1512885ae206e91d29b43db678dbf12ed",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/efros_small2_7.jpg": {
+      "sha256": "38cc23c4c8ba46cc576f50eeb53345ca31473423185f279a8e4b61a562f488f1",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/fire_11.jpg": {
+      "sha256": "fd67785420cb259771e2c241d868dff270f1af1b3292b4c25919d9519aa409f6",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/fire_15.jpg": {
+      "sha256": "916c46dae21e7795906b34755c1b06158754afab2995e0104bfa27f637363a42",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/fire_19.jpg": {
+      "sha256": "c05c33f5f401d59304d7225b7413690bed7fd224f3a503d9d879c0fb462296ca",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/fire_3.jpg": {
+      "sha256": "56271db26416281f6097479d654d57905da31f610b70206357319a68e53c005f",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/fire_5.jpg": {
+      "sha256": "792cd0f2723d55d7fc7d90eef4dcf4752d571a35cf351b23b0bce1a798c6ff04",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/fire_7.jpg": {
+      "sha256": "de0c88af0fabfebb04c1a7c79a4e963d960a3c1f43ce4a025fff1f4c68dfd961",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/metal_small_11.jpg": {
+      "sha256": "9da8b85fc0083c8b04fa4df74edbb29408224ee989bc28810d9760c8a9aa9bbb",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/metal_small_15.jpg": {
+      "sha256": "b7a71aa01808a50edc49e12bec28c38a2062a593a8eb91b62717b0973f7fdc9e",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/metal_small_19.jpg": {
+      "sha256": "4e761c24b88e09d59efcd849120fbec911d143b5c581306cd9ffe37b02829eb4",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/metal_small_3.jpg": {
+      "sha256": "66fe9babb09cf8917f28dca394fbed23a35bffeb020b17e35fde710b2fafa2d7",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/metal_small_5.jpg": {
+      "sha256": "f33cfe82788a6b8b33ffea72fd0d1679761f7544168eb17b1c8fe09578d0adb7",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/results/metal_small_7.jpg": {
+      "sha256": "0313ad843200a5d25c92023083084048fe3d5072926d973351bb6bf126f6c418",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/synth.m": {
+      "sha256": "ddacdc57b2b3a2fa24de6a34ee78ba60de91b105e2832868f0b16f75954ac060",
+      "source": "live rubinsteyn.com"
+    },
+    "comp_photo/texture/synth_gmm.m": {
+      "sha256": "5129e4f1c7119d57c71b08fa9a409326b16dd45cdd9858a36058b318e9fac9e0",
+      "source": "live rubinsteyn.com"
+    },
+    "css/genepool.css": {
+      "sha256": "dfe295b018dfb0eda4096968b41d6cfeb78322d54860c619e6aa37af089c4f11",
+      "source_commit": "6ecd9c465a432e1b028e704535ec05b5a1ab163a"
+    },
+    "css/iefix.css": {
+      "sha256": "cc207bd86b49250a75110fc1a6152ca89776f466095a658ef1412b2d1d595bc2",
+      "source_commit": "6ecd9c465a432e1b028e704535ec05b5a1ab163a"
+    },
+    "css/style.css": {
+      "sha256": "f05778e3202e7ab420eaccce883bcb109c7833ad2ebee6e35e49650589f48dc0",
+      "source_commit": "0fc4c01baab7dd9e8476a88c7529857571836474"
+    },
+    "css/writing.css": {
+      "sha256": "56a89b3189898908ba1a4362c31e0bc2bfea899d24f3aff6bfb4dd0e21a2cd84",
+      "source_commit": "6ecd9c465a432e1b028e704535ec05b5a1ab163a"
+    },
+    "css/zahir_style.css": {
+      "sha256": "23caf0210648ca489c902d937c7b32d1e967dd084284199b7bb95dd3cc670ff3",
+      "source_commit": "6ecd9c465a432e1b028e704535ec05b5a1ab163a"
+    },
+    "files/2020-09-14-Precision-vaccine-design-from-cancer-to-SARS-CoV-2-and-back.pdf": {
+      "sha256": "8a9afc10b83ada9f0a0b37668903d7921f3f34354b4a3abac8e6849214a10e24",
+      "source": "live rubinsteyn.com"
+    },
+    "files/CIMT-2021.pdf": {
+      "sha256": "2c51d121bd3374612ec46bcc8f436ebcfdd8c5c351fc838569357d2e4a33c89a",
+      "source": "live rubinsteyn.com"
+    },
+    "files/CudaTree-GTC.pdf": {
+      "sha256": "8970ff6e89abb9b6b63b6c51bbba9f7e2a56cdfdd73daa73953358e2c98bb7af",
+      "source": "live rubinsteyn.com"
+    },
+    "files/Data_Science_Salon_Feb_9_2018.pdf": {
+      "sha256": "f9959b91dab6d292d108ffbcbac83954d8f4ec7279b730c91b8fb19af7cbb8fa",
+      "source": "live rubinsteyn.com"
+    },
+    "files/MSKCC-Cancer-Systems-Biology-2014.pdf": {
+      "sha256": "533311c8cb47d75622bdf46ddbce7c106c803f3f94d9aad52ae1a98b78502393",
+      "source": "live rubinsteyn.com"
+    },
+    "files/Machines-of-Loving-Hype-Sep-3-2025.pdf": {
+      "sha256": "ec8ce5bef71402297eca13b115e9f6c82cab0e57ff1936390d02a2821aafd296",
+      "source": "live rubinsteyn.com"
+    },
+    "files/Personalized_Cancer_Vaccines_Literature_Review.pdf": {
+      "sha256": "1faf814bfc713453a82b44edcd09cb1d99803f41ca3f5112c247a80185cb6bb7",
+      "source": "live rubinsteyn.com"
+    },
+    "files/PyData_NYC_2013_Slides.pdf": {
+      "sha256": "e8156b789767f5985ad792f39e1900f1c870bef495b0a256f9e4f296adaed0ca",
+      "source": "live rubinsteyn.com"
+    },
+    "files/cv.pdf": {
+      "sha256": "ba0969face49abadf77b454b77cb0c76a56c08db88993218cdde89db7ce61783",
+      "source": "live rubinsteyn.com"
+    },
+    "files/musc_2017_03_27_personalized_cancer_vaccines.pdf": {
+      "sha256": "630418cd89cbcf05e393b0cfab9510fd6facee9627b0350f4f62951b5f0b4d26",
+      "source": "live rubinsteyn.com"
+    },
+    "files/parakeet_pydata_boston2013.pdf": {
+      "sha256": "3370ae629743359ea16eecbd16b306af05cf36d14ff7c561af30a2a9eecf8ff9",
+      "source": "live rubinsteyn.com"
+    },
+    "files/um_ccs_2017_02_21_immunotherapy.pdf": {
+      "sha256": "4e5a4398727fc9dde06a36717d725e4e95d73a666448e9876f04321d90888499",
+      "source": "live rubinsteyn.com"
+    },
+    "genepool/GenePool.zip": {
+      "sha256": "1d5577f85b9974a4ca74e7f9d85a4c1dfa99174314bf6ebbd05b6d5a96ba0625",
+      "source": "live rubinsteyn.com"
+    },
+    "genepool/genepool.css": {
+      "sha256": "dfe295b018dfb0eda4096968b41d6cfeb78322d54860c619e6aa37af089c4f11",
+      "source": "live rubinsteyn.com"
+    },
+    "genepool/test.ml": {
+      "sha256": "d760210e3fafaaf2ddde4ba0a367fcae9ef2b2717ac461cb06032d8d0c0b65b7",
+      "source": "live rubinsteyn.com"
+    },
+    "hps/RR_deriv.pdf": {
+      "sha256": "548a3abcc594a59f1b5f154994e736d0668323311f1eabfb3cb5ccb7b4c74e6a",
+      "alias_of": "text/RR_deriv.pdf"
+    },
+    "iefix.css": {
+      "sha256": "cc207bd86b49250a75110fc1a6152ca89776f466095a658ef1412b2d1d595bc2",
+      "source": "live rubinsteyn.com"
+    },
+    "images/at.jpg": {
+      "sha256": "6e7094801da60e9a6aa931624a4ea31c957429a32b128718efcdbebc22d94200",
+      "source": "live rubinsteyn.com"
+    },
+    "images/bear_logo.jpg": {
+      "sha256": "99f62fab01f1454cd239192f721c16372f5fad5383d29b5e73d4d4b8f87e0308",
+      "source": "live rubinsteyn.com"
+    },
+    "images/bottom.png": {
+      "sha256": "8c59fa5e4c651f9665280e1b1d6e0e6ea8dabdb512286a87e082bf07227638d2",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst.jpg": {
+      "sha256": "8eced809ae8349eeefa0080485b1250428ebd2bc4c3a3fbf7fa4b9b4f6db34d4",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst1.jpg": {
+      "sha256": "67a0df6c1961d8cce25706dffeaea71076e0a8535afedf94a1a4a0d0c844f210",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst1_small.jpg": {
+      "sha256": "01e7d676cf8268cca1ebec403d8cb1dfe551db491663d4b3e5e447a1bd411ba4",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst2.jpg": {
+      "sha256": "27e2150d9a068a8acb803b7f3f486641c2e2201864d5361cef30c98ac8c26182",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst2_small.jpg": {
+      "sha256": "e9bfc82e808652781ec01c1c1ef5fc71fa967d6d7c7b29e583f1241481afb88f",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst3.jpg": {
+      "sha256": "160c7288b4d8b9624b05505ca3ef674e4ee5b84ead2ad44dbc5a0e0527d46316",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst3_small.jpg": {
+      "sha256": "2ab9cba6d0f227f451de48e49781840c08cb199524edc8c8737e2f93f8023395",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst4.jpg": {
+      "sha256": "f7579d459d93d65db1b1da407cf7642f1457151c37f5da716a3f5b690869b5f4",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst4_small.jpg": {
+      "sha256": "a111d96d906e27ca2978500b24e3784f17e93c709c9f07d28bb1aeb528e73e91",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst5.jpg": {
+      "sha256": "ef73ab2f90a91c613134d0b1b7fa8f0198805a8ea6bbaac75368001f7e87f1ce",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst5_small.jpg": {
+      "sha256": "21de20edf7f52f47f4a15b04f6dc7e4e4bd39b19a157e7ea723ea8f9476cc62e",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst6.jpg": {
+      "sha256": "f19f2c77dbe10a51045b0e0220a76f1f605cd09f3c0a47ff5f962533f788cc9d",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst6_small.jpg": {
+      "sha256": "ca4e6c47e47c0df1e5b9dfead4c526008e7e754681b8e8e83f3de3f4eaa0abf9",
+      "source": "live rubinsteyn.com"
+    },
+    "images/inst_small.jpg": {
+      "sha256": "932aa181310f585928c9d8e95b260e2baaf5a0a67b13e3965a58446564cd5ef7",
+      "source": "live rubinsteyn.com"
+    },
+    "images/logo2.psd": {
+      "sha256": "54939448df46b27d9127193d1c072621434a498bdf8d96c32a3673ec03425fd1",
+      "source": "live rubinsteyn.com"
+    },
+    "images/seacow.jpg": {
+      "sha256": "bbe005238bb9d5ee854a4017bddd05eadbf30488eef853547102add916ded63c",
+      "source": "live rubinsteyn.com"
+    },
+    "images/seacow.png": {
+      "sha256": "e2a69904fe9302a629ef2ada06cea3ad5b571bf17f55100d534116e937401656",
+      "source_commit": "06a5b235a1de113213662aae1ffc2220acbece3f"
+    },
+    "images/websiteadmin1.jpg": {
+      "sha256": "2cc22088bf7a4f8c95a9baf0b2f311b006b79c3c976b72575f48aa7cf9e79c09",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin1_small.jpg": {
+      "sha256": "c4b249c29ce1d28121cd4851a332a5a8db820ced188025792e3f49ea2ac9262e",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin2.jpg": {
+      "sha256": "fab86531578968243fe1b04570da42b3bf36b3a0eb8dcec56ef421760add0445",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin2_small.jpg": {
+      "sha256": "3ff840798a73fea4cc306eade522ff46f6209bda8eabe01d410ea59348a85a76",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin3.jpg": {
+      "sha256": "9f5f5a32e4de295e027d181502d46f21d5e17a83c47b63b1d2ded485fb384b47",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin3_small.jpg": {
+      "sha256": "ab0e5864f92e4caab9b1dff0d84955077356fdc95eade23064e9b96a0cec3c12",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin4.jpg": {
+      "sha256": "1a31ac7eb0550d27d5cc5128f686e96ed9556b76e38936ceb675831eb361ace4",
+      "source": "live rubinsteyn.com"
+    },
+    "images/websiteadmin4_small.jpg": {
+      "sha256": "ed22126a170320ed36aadf92339386197ff020020a7544be1a9a8a2e6815e97d",
+      "source": "live rubinsteyn.com"
+    },
+    "pl_fall_2011/hw3.adb": {
+      "sha256": "70434251d3caeb7ed08b05f15276a9e4113878266a9562bb30a60b8816597b83",
+      "source": "live rubinsteyn.com"
+    },
+    "pl_fall_2011/hw3_input.txt": {
+      "sha256": "86c4cee656a83779854b79a776f43377f8e0fe6b0ac141c81b6378a8360ee5a2",
+      "source": "live rubinsteyn.com"
+    },
+    "pl_fall_2011/pl.css": {
+      "sha256": "f86093cc6e0acdbb76c17bb73ae72d85c6ea4ac6a4653e65db829707a6faa005",
+      "source": "live rubinsteyn.com"
+    },
+    "pl_fall_2011/polynomials.adb": {
+      "sha256": "21e3cdfebc921b627a2d6d91d063ea2d37c0864b91a75f106e8316fb813e1f1f",
+      "source": "live rubinsteyn.com"
+    },
+    "pl_fall_2011/polynomials.ads": {
+      "sha256": "871517e1553f03c3e82589a11dfa69c0ced1a34bcde6eaa536d5c98da5e36652",
+      "source": "live rubinsteyn.com"
+    },
+    "seacow.png": {
+      "sha256": "e2a69904fe9302a629ef2ada06cea3ad5b571bf17f55100d534116e937401656",
+      "source_commit": "6ecd9c465a432e1b028e704535ec05b5a1ab163a"
+    },
+    "style.css": {
+      "sha256": "e3570cb7995881970ea352d547eb307c88b94089c5c35c99095fba54d9df314d",
+      "source": "live rubinsteyn.com"
+    },
+    "text/RR_deriv.pdf": {
+      "sha256": "548a3abcc594a59f1b5f154994e736d0668323311f1eabfb3cb5ccb7b4c74e6a",
+      "source": "live rubinsteyn.com"
+    },
+    "text/text.css": {
+      "sha256": "56a89b3189898908ba1a4362c31e0bc2bfea899d24f3aff6bfb4dd0e21a2cd84",
+      "source": "live rubinsteyn.com"
+    },
+    "writing/RR_deriv.pdf": {
+      "sha256": "548a3abcc594a59f1b5f154994e736d0668323311f1eabfb3cb5ccb7b4c74e6a",
+      "alias_of": "text/RR_deriv.pdf"
+    },
+    "zahir/arraylang/ArrayLang_0.1.zip": {
+      "sha256": "8eab615dcb9ffd6dada4b566b68281c78e8ccba5f887e212e63a9c00fc854121",
+      "source": "live rubinsteyn.com"
+    },
+    "zahir/arraylang/ArrayLang_0.2.zip": {
+      "sha256": "ac793d7225dea6f24cb43918a9d65cfc3a63f2661ba1476253adb968216ada0b",
+      "source": "live rubinsteyn.com"
+    },
+    "zahir/arraylang/ArrayLang_0.3.zip": {
+      "sha256": "af20a1d2f79bc2c6ea6a1734ff62203abd71e19a256019ffcd0d495f2e6431ba",
+      "source": "live rubinsteyn.com"
+    },
+    "zahir/arraylang/ArrayLang_0.4.zip": {
+      "sha256": "7fec5874d5ede67f073a304946320bf04f4370423a3d379a3fe5134505243c7b",
+      "source": "live rubinsteyn.com"
+    },
+    "zahir/arraylang/style.css": {
+      "sha256": "2b80efb6dbf59b5c87054e4449dcc2c3a9b82b55acb45408c03897a1f50e6bd0",
+      "source": "live rubinsteyn.com"
+    },
+    "zahir/zahir_style.css": {
+      "sha256": "23caf0210648ca489c902d937c7b32d1e967dd084284199b7bb95dd3cc670ff3",
+      "source": "live rubinsteyn.com"
+    }
+  },
+  "original_pages": {
+    "/0x194.html": "/0x194.html",
+    "/comp_photo/hw1/index.html": "/comp_photo/hw1/index.html",
+    "/comp_photo/hw2/index.html": "/comp_photo/hw2/index.html",
+    "/comp_photo/texture/index.html": "/comp_photo/texture/index.html",
+    "/genepool/index.html": "/genepool/index.html",
+    "/index.php": "/",
+    "/life_is_finite.html": "/life_is_finite.html",
+    "/pl_fall_2011/hw1.html": "/pl_fall_2011/hw1.html",
+    "/pl_fall_2011/hw2.html": "/pl_fall_2011/hw2.html",
+    "/pl_fall_2011/hw3.html": "/pl_fall_2011/hw3.html",
+    "/pl_fall_2011/hw4.html": "/pl_fall_2011/hw4.html",
+    "/pl_fall_2011/hw5.html": "/pl_fall_2011/hw5.html",
+    "/pl_fall_2011/hw6.html": "/pl_fall_2011/hw6.html",
+    "/pl_fall_2011/hw7.html": "/pl_fall_2011/hw7.html",
+    "/pl_fall_2011/index.html": "/pl_fall_2011/index.html",
+    "/pl_fall_2011/recitation.html": "/pl_fall_2011/recitation.html",
+    "/text/dating.html": "/text/dating.html",
+    "/text/monoids.html": "/text/monoids.html",
+    "/text/ocaml_links.php": "/text/ocaml_links.html",
+    "/text/template_insanity.html": "/text/template_insanity.html",
+    "/webdev.php": "/webdev.html",
+    "/zahir/arraylang/index.html": "/zahir/arraylang/index.html",
+    "/zahir/arraylang/v0.4.html": "/zahir/arraylang/v0.4.html",
+    "/zahir/index.html": "/zahir/index.html"
+  },
+  "directory_listings": [
+    "comp_photo",
+    "comp_photo/texture/gmm_results",
+    "comp_photo/texture/results",
+    "files",
+    "images",
+    "text",
+    "css",
+    "hps"
+  ],
+  "redirects": {
+    "/index.php": "/",
+    "/webdev.php": "/webdev.html",
+    "/text/ocaml_links.php": "/text/ocaml_links.html",
+    "/genepool/index.php": "/genepool/",
+    "/projects.php": "/projects.html",
+    "/text.php": "/text/",
+    "/writing.php": "/text/",
+    "/writing/": "/text/",
+    "/writing/dating.html": "/text/dating.html",
+    "/writing/monoids.html": "/text/monoids.html",
+    "/writing/template_insanity.html": "/text/template_insanity.html",
+    "/monoids.html": "/text/monoids.html",
+    "/template_insanity.html": "/text/template_insanity.html"
+  },
+  "redirect_files": [
+    "index.php/index.html",
+    "webdev.php/index.html",
+    "text/ocaml_links.php/index.html",
+    "genepool/index.php/index.html",
+    "projects.php/index.html",
+    "text.php/index.html",
+    "writing.php/index.html",
+    "writing/index.html",
+    "writing/dating.html",
+    "writing/monoids.html",
+    "writing/template_insanity.html",
+    "monoids.html",
+    "template_insanity.html"
+  ]
+}

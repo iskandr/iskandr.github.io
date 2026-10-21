@@ -15,6 +15,7 @@
   <h1>Page not found</h1>
   <p>This page may have moved. These links can help you find it:</p>
   <ul>
+    <li><a href="/archive.html">Full archive and downloads</a></li>
     <li><a data-site-path="/" href="/">Alex Rubinsteyn’s homepage</a></li>
     <li><a data-site-path="/webdev.html" href="/webdev.html">Web Development</a></li>
     <li><a data-site-path="/text/ocaml_links.html" href="/text/ocaml_links.html">Resources for Learning OCaml</a></li>
@@ -23,13 +24,59 @@
   <script>
     const requestedPath = location.pathname.replace(/\/+$/, '') || '/';
     const redirects = new Map([
-      ['/index.php', '/'],
-      ['/webdev.php', '/webdev.html'],
-      ['/text/ocaml_links.php', '/text/ocaml_links.html'],
-      ['/genepool/index.php', '/genepool/'],
-      ['/hps/RR_deriv.pdf', '/text/RR_deriv.pdf'],
-      ['/projects.html', '/']
-    ]);
+      [
+            "/index.php",
+            "/"
+      ],
+      [
+            "/webdev.php",
+            "/webdev.html"
+      ],
+      [
+            "/text/ocaml_links.php",
+            "/text/ocaml_links.html"
+      ],
+      [
+            "/genepool/index.php",
+            "/genepool/"
+      ],
+      [
+            "/projects.php",
+            "/projects.html"
+      ],
+      [
+            "/text.php",
+            "/text/"
+      ],
+      [
+            "/writing.php",
+            "/text/"
+      ],
+      [
+            "/writing",
+            "/text/"
+      ],
+      [
+            "/writing/dating.html",
+            "/text/dating.html"
+      ],
+      [
+            "/writing/monoids.html",
+            "/text/monoids.html"
+      ],
+      [
+            "/writing/template_insanity.html",
+            "/text/template_insanity.html"
+      ],
+      [
+            "/monoids.html",
+            "/text/monoids.html"
+      ],
+      [
+            "/template_insanity.html",
+            "/text/template_insanity.html"
+      ]
+]);
     document.querySelectorAll('[data-site-path]').forEach(link => {
       link.href = link.dataset.sitePath;
     });
