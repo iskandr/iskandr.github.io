@@ -158,10 +158,10 @@ The learning rate ought to be a small value (somewhere between 0.00001 and 0.1) 
 <pre>
 	C(w) =  &sum;(x<sub>i</sub><sup>T</sup>&middot;w - y<sub>i</sub>)<sup>2</sup> + &alpha;&sum;w<sub>j</sub><sup>2</sup>
 </pre>
-You'll notice that the first term (the loss) is the same loss function we used in OLS regression. The regularization term (on the right) penalizes the norm of <code>w</code> and thus guides the algorithm to prefer smaller weights. In practice, this works quite well. The choice of a regularization term may seem arbitrary, but ridge regression can actually be <a href="RR_deriv.pdf">derived<a/> from some simple probabilistic assumptions. (<em>derivation care of <a href="http://sergeyfeldman.googlepages.com">Sergey Feldman</a></em>).</p>
+You'll notice that the first term (the loss) is the same loss function we used in OLS regression. The regularization term (on the right) penalizes the norm of <code>w</code> and thus guides the algorithm to prefer smaller weights. In practice, this works quite well. The choice of a regularization term may seem arbitrary, but ridge regression can actually be <a href="RR_deriv.pdf">derived</a> from some simple probabilistic assumptions. (<em>derivation care of <a href="http://sergeyfeldman.googlepages.com">Sergey Feldman</a></em>).</p>
 
 <h2>A Note on Support Vector Machines</h2>
-<href="http://en.wikipedia.org/wiki/Support_vector_machine">Support vector machines</a> have been something of a machine learning wunderkind for 10 or so years (ie, you might have heard of them). At first, they seem very intimidating and complicated. You might be relieved to discover that for linear systems (like the one we're dealing with in the dating game) SVMs are nothing more than the combination of a smart loss function (<a href="http://research.microsoft.com/~manik/projects/trade-off/hinge.html">hinge loss</a>), the same regularization term we use for ridge regression, and a quick optimization method (<a href="http://research.microsoft.com/~jplatt/smo.html">SMO</a>). That's it. In their usual form, however, an SVM wouldn't be a good fit for the Dating Game. SVMs generate classifiers which label each candiate as <code>+1</code> or <code>-1</code>. Since we're dealing with continuous values of <code>y<sub>i</sub></code>, a classifier wouldn't do us much good. You <em>can</em> do regression with an SVM variant, but it's definitely overkill for the Dating Game. 
+<a href="http://en.wikipedia.org/wiki/Support_vector_machine">Support vector machines</a> have been something of a machine learning wunderkind for 10 or so years (ie, you might have heard of them). At first, they seem very intimidating and complicated. You might be relieved to discover that for linear systems (like the one we're dealing with in the dating game) SVMs are nothing more than the combination of a smart loss function (<a href="http://research.microsoft.com/~manik/projects/trade-off/hinge.html">hinge loss</a>), the same regularization term we use for ridge regression, and a quick optimization method (<a href="http://research.microsoft.com/~jplatt/smo.html">SMO</a>). That's it. In their usual form, however, an SVM wouldn't be a good fit for the Dating Game. SVMs generate classifiers which label each candiate as <code>+1</code> or <code>-1</code>. Since we're dealing with continuous values of <code>y<sub>i</sub></code>, a classifier wouldn't do us much good. You <em>can</em> do regression with an SVM variant, but it's definitely overkill for the Dating Game.
 </p>
 
 <h2>More Info</h2>
@@ -173,4 +173,5 @@ You'll notice that the first term (the loss) is the same loss function we used i
 </ul>
 
 
+  </div>
   </body></html>
