@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Programming Languages (Fall 2011) - Homework 3 Solution</title>
+<link rel=StyleSheet href="pl.css" type="text/css" media=screen>
+</head>
+<body>
+<div id="rightlink">
+<a href="http://cs.nyu.edu/courses/fall11/CSCI-GA.2110-001/">Programming Languages - Fall 2011</a>
+</div>
+<div id="content">
+<h1>Programming Languages Recitation Links</h1>
+<h2>Grammars, Parsing, and Formal Languages</h2>
+<ul>
+    <li><a href="http://everything2.com/title/formal+grammar">Everything2: Formal grammar</a>: What's a formal language? How do we generate strings from a grammar?</li>
+    <li><a href="http://www.garshol.priv.no/download/text/bnf.html">BNF and EBNF: What are they and how do they work?</a></li>
+    <li><a href="http://docs.python.org/py3k/reference/grammar.html">Python Grammar</a>: Impressively short grammar for the syntax of the Python programming language.</li>
+</ul>
+
+<h2>Simple Models of Computation</h2>
+No programming language is more "powerful" than any other. Anything that can be written in one
+language can be encoded in another. That encoding may not necessarily be pleasant or compact, but it is possible. 
+Most languages are hard to reason about in our heads, they have complicated semantics with lots of edge cases. For this reason, people
+concerned with proving properties of computational systems often instead use simpler (but equally powerful!) computational models
+like the <a href="http://en.wikipedia.org/wiki/Lambda_calculus">Lambda Calculus</a> and the <a href="http://en.wikipedia.org/wiki/Universal_Turing_machine">Universal Turing Machine</a>. 
+<ul>
+    <li><a href="http://www.cs.unm.edu/~saia/computability.html">What does it mean to compute?</a></li>
+    <li><a href="http://matt.might.net/articles/compiling-up-to-lambda-calculus/">Compiling to lambda-calculus: Turtles all the way down</a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Church_encoding">Church Encoding</a>: This is how you do arithmetic when your only data type is a function.</li>
+    <li><a href="http://www.youtube.com/watch?v=bZ1X1mj4w_k">Universal Turing Machine encoded within the Game of Life</a>: 
+   Conway's  <a href="http://www.math.com/students/wonders/life/life.html">Game of Life</a> is an extremely simple rule system for turning on and off the elements of a grid.
+    It is (strangely) possible to translate any program into a particular configuration of grid cells, run the simulation, and get back the result of your computation. 
+    <li><a href="http://aturingmachine.com/">A Turing Machine: In The Classic Style</a>: A physical Turing Machine. Insane and awesome.</li>
+</ul>
+
+<h2>Type Systems</h2>
+
+<ul>
+    <li><a href="http://www.quora.com/Why-do-programming-languages-use-type-systems">Why do programming languages use type systems?</a></li>
+    <li><a href="http://blog.steveklabnik.com/2010/07/17/what-to-know-before-debating-type-systems.html">What to Know Before Debating Type Systems</a></li>
+    <li><a href="http://c2.com/cgi/wiki?TypingQuadrant">Type System Quadrant</a>: Splits languages along the weak/strong and safe/unsafe axes.</li>
+    <li><a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Programming Languages</a>: The Bible of type system theory.</li>
+</ul>
+
+<h2>Memory Management</h2>
+<ul>
+	<li><a href="http://www.ibm.com/developerworks/linux/library/l-memory/">The choices, tradeoffs, and implementations of dynamic allocation</a></li>
+	<li><a href="http://www.ipipan.gda.pl/~marek/objects/faq/oo-faq-S-3.12.html">Why is Garbage Collection a Good Thing?</a></li>
+	<li><a href="http://icu-project.org/docs/papers/cpp_report/an_introduction_to_garbage_collection_part_ii.html">An Introduction to Garbage Collection: A Look Under the Hood</a></li>
+	<li><a href="http://blogs.msdn.com/b/abhinaba/archive/2009/01/30/back-to-basics-mark-and-sweep-garbage-collection.aspx">Back To Basics: Mark and Sweep Garbage Collection</a></li>
+	<li><a href="http://www.quora.com/How-does-garbage-collection-work-in-the-JVM">How does garbage collection work in the JVM?</a></li>
+</ul>
+
+<h2>Function Values and Closures</h2>
+Programming languages like C treat functions essentially as dumb labels. You can't bottle up a function into a runtime value and pass it around. To make functions 
+into first-class values in a language we need closures, which are often implemented as the function's code pointer paired with an environment record. 
+<ul>
+    <li><a href="http://blog.morrisjohns.com/javascript_closures_for_dummies.html">Javascript Closures for Dummies</a></li>
+    <li><a href="http://people.csail.mit.edu/gregs/ll1-discuss-archive-html/msg03277.html">Closures are (roughly) the same thing as objects</a></li>
+</ul>
+
+<h2>Higher Order Programming</h2>
+First order functions take just data as their arguments. Higher order functions have at least some arguments which are themselves functions. 
+<ul>
+    <li><a href="http://www.joelonsoftware.com/items/2006/08/01.html">Can Your Programming Language Do This?</a> </li>
+    <li><a href="http://www.programmersheaven.com/user/pheaven/blog/133-Higher-Order-Programming-Is-Easy/">Higher Order Programming is Easy</a></li>
+    <li><a href="http://www.recessframework.org/page/map-reduce-anonymous-functions-lambdas-php">Implementing 'map' and 'reduce' operators in PHP</a></li>
+</ul>
+
+<h2>Translation, Compilation, Bytecode, and Virtual Machines</h2>
+<ul>
+    <li><a href="http://www.sidhe.org/~dan/blog/archives/000189.html">Registers vs. Stacks for Interpreter Design</a></li>
+    <li><a href="http://www.antlr.org/wiki/display/CS652/Stack+machines">Stack machines</a>: Sketch of how virtual machines like the JVM work.</li>
+    <li><a href="http://www.artima.com/underthehood/bytecodeP.html">Bytecode Basics</a>: Overview of the JVM bytecode.</li>
+    <li><a href="http://serp.sourceforge.net/">Serp</a>: A library for creating/manipulating JVM bytecode on the fly.</li>
+</ul>
+
+
+<h2>Lisp and Scheme</h2>
+<ul>
+    <li><a href="http://www.paulgraham.com/rootsoflisp.html">Roots of Lisp</a></li>
+    <li><a href="http://mitpress.mit.edu/sicp/full-text/book/book.html">Structure and Interpretation of Computer Programs</a></li>
+    <li><a href="http://matt.might.net/articles/compiling-scheme-to-c/">Compiling Scheme to C</a></li>
+</ul>
+
+<h2>ML and the Hindley-Milner type system</h2>
+<ul>
+    <li><a href="http://matt.might.net/articles/best-programming-languages/#ml">Standard ML and OCaml</a> Overview of the two languages and more detailed links.</li>
+    <li><a href="http://vimeo.com/14317442">Caml Trading</a> Video of Yaron Minsky from Jane Street talking about how his company uses ML.</li>
+    <li><a href="http://www.codecommit.com/blog/scala/what-is-hindley-milner-and-why-is-it-cool">What is Hindley-Milner? (and why is it cool?)</a></li>
+</ul>
+
+</div>
+
+</body>
+</html>

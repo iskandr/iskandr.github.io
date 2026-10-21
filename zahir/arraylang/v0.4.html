@@ -1,0 +1,186 @@
+<html>
+<head><title>ArrayLang</title>
+<LINK rel=StyleSheet href="style.css"  type="text/css">
+<style type="text/css">
+body { background-color: white; }
+</style>
+</head>
+<body>
+<h2>ArrayLang</h2>
+Download: version 0.4 <a href="ArrayLang_0.4.zip">zip file</a>
+
+<h3>Examples</h3>
+<code class="example">
+<span class="comment">#product of a vector</span>
+def prod(data) = reduce( op.mult, data)
+
+<span class="comment">#factorial</span>
+let fact = @(n) prod(1:n) 
+
+<!-- 
+<span class="comment">#pads an array with its first and last values</span>
+def pad(data) = [data(1)] ++ data ++ [data(-1)]
+</code>
+-->
+
+<h3>Primitive Types</h3>
+<table>
+<tr><th>type</th><th>example</th><th>operators</th></tr>
+<tr>
+<td>number</td>
+<td>7, -3.14</td>
+<td><big>== ~= + - * / &lt; &gt; &gt;= &lt;=</big></td> 
+</tr>
+<tr>
+<td>boolean</td>
+<td>true, false</td>
+<td><big>== ~= ~ || &amp;&amp;</big></td>
+</tr>
+<tr>
+<td>string</td>
+<td>"whistle"</td>
+<td><big>==</big></td>
+</tr>
+<tr>
+<td>row</td>
+<td>[1 2 3], 1:10</td>
+<td><big>== ~= + - * / .+ .- .* ./  &lt; &gt; &gt;= &lt;=</big></td>
+</tr>
+<tr>
+<td>col</td>
+<td>[1 2 3]', (1:10)'</td>
+<td><big>== ~= + - * / .+ .- .* ./  &lt; &gt; &gt;= &lt;=</big></td>
+</tr>
+<tr>
+<td>tuple</td>
+<td>(1,"hello", true)</td>
+<td></td>
+</table>
+<h3>Function Definition</h3>
+<code>
+<strong>def</strong> <em>fn_name</em> <strong>(</strong><em>arg1</em>, ..., <em>argn </em><strong>)</strong> = <em>expr</em><br/>
+</code>
+
+<h3>Variable Definition</h3>
+<code>
+<strong>let</strong> <em>pattern</em> <strong>=</strong> <em>expr</em>
+</code>
+
+<h3>Anonymous Functions</h3>
+<code>
+<strong>@</strong><strong>(</strong><em>arg1</em>, ..., <em>argn </em><strong>)</strong> <em>expr</em>
+</code>
+
+<h3>Local Bindings</h3>
+<code>
+<strong>let</strong> <em>pattern</em> <strong>=</strong> <em>expr</em> <strong>in</strong> <em>expr</em>
+</code>
+
+<h3>Pattern Matching</h3>
+<code>
+<strong>let</strong> <em>tuple_pattern</em> <strong>=</strong> <em>tuple</em> <strong>in</strong> <em>expr</em>
+<br />
+<strong>let</strong> <em>_</em> <strong>=</strong> <em>expr</em> <strong>in</strong> <em>expr</em>
+</code>
+
+
+<h3>Sequence of expressions</h3>
+<code><em>expr1</em><strong>;</strong> ...<strong>;</strong> <em>exprn</em></code>
+
+
+<h3>Control Flow</h3>
+<code>
+<strong>if</strong> <em>test</em> <strong>then</strong> <em>expr</em>
+</code>
+
+<code>
+<strong>if</strong> <em>test</em> <strong>then</strong> <em>trueExpr</em> <strong> else </strong> <em> falseExpr </em>
+</code>
+
+<h3>Array Constructor</h3>
+<code>
+<strong>[</strong> <em>expr1 expr2</em> ... <em>exprn</em> <strong>]</strong>
+</code>
+
+
+<h3>Array Range Constructor</h3>
+<code>
+ <em>exprLower</em> <strong>:</strong> <em>exprUpper</em><br/>
+ <em>exprLower</em> <strong>:</strong> <em>exprUpper</em> <strong>by</strong> <em>stride</em>
+</code>
+
+<h3>Array Concatenation</h3>
+<code>
+ <em>array1</em> <strong>++</strong> <em>array2</em>
+</code>
+
+<h3>Tuples</h3>
+<code><em>expr1</em>, ..., <em>exprn</em></code>
+
+<h3>Functional For-Loop Array Construction</h3>
+<code>
+<strong>for</strong> <em>pattern</em> <strong>in</strong> <em>expr</em> <strong>do</strong> <em>expr</em> <strong></strong> 
+</code>
+
+<br /> <br />
+<h2>Features Not Yet Type-Checkable</h2>
+<h3>Container patterns</h3>
+<code>
+<strong>let</strong> <strong>[</strong><em>array_pattern</em><strong>]</strong> <strong>=</strong> <em>array</em> <strong>in</strong> <em>expr</em>
+<br/>
+<strong>let</strong> <strong>{</strong><em>list_pattern</em><strong>}</strong> <strong>=</strong> <em>list</em> <strong>in</strong> <em>expr</em>
+<br />
+</code>
+
+<h3>Overloading</h3>
+<code>
+<strong>let</strong> <em>id</em> <strong>=</strong> <strong>generic</strong>(<em>overload1</em>, <em>overload2</em>)
+</code>
+
+<br /><br />
+<hr>
+<h2>Planned Features</h2>
+
+
+<h3>Array Slicing</h3>
+<code class="example">
+   let A = [1:5 21:25]
+   let B = A(1, 1:3)  <span class="comment"># [1 2 3] </span>
+   let C = A(2,:)     <span class="comment"># [21 22 23 24 25]</span>
+</code>
+
+<h3>Window For-Loop Array Construction</h3>
+<code>
+<strong>for window</strong> <em>id</em><strong>[</strong><em>size</em><strong>]</strong> <strong>in</strong> <em>array</em> <strong>do</strong> <em>expr</em> <strong></strong> 
+</code>
+
+
+<h3>Element-wise For-Loop Array Construction</h3>
+<code>
+<strong>for each</strong> <em>pattern</em> <strong>in</strong> <em>array</em> <strong>do</strong> <em>expr</em> <strong></strong> 
+</code>
+
+<h3>Partial Function Application</h3>
+<code class="example">
+   def f(x,y) = x + y 
+   let plusOne = f(1, _)
+</code>
+
+<h3>Match Statements</h3>
+<code><strong>match</strong> <em>expr</em> <strong>with</strong> <br />
+<em>pattern_1</em> <strong>-></strong> <em>expr_1</em> <br />
+...<br />
+<strong>|</strong> <em>pattern_n</em> <strong>-></strong> <em>expr_n</em> <br />
+<strong>end</strong>
+</code>
+
+<h3>Tagged Unions</h3>
+<code>
+<strong>type</strong> <em>name</em> <strong>(</strong>type_args<strong>)</strong> <strong>=</strong> 
+<em>CName_1</em> <strong>of</strong> <em>typeExpr1</em> ...
+<strong>|</strong> CName_n <strong>of</strong> <em>typeExpr_n</em>
+</code> 
+
+</body>
+
+</html>

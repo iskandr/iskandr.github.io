@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Programming Languages (Fall 2011) - Homework 6 Solution</title>
+<link rel=StyleSheet href="pl.css" type="text/css" media=screen>
+</head>
+<body>
+<div id="rightlink">
+<a href="http://cs.nyu.edu/courses/fall11/CSCI-GA.2110-001/">Programming Languages - Fall 2011</a>
+</div>
+<div id="content">
+<h1>Homework 6 Solution</h1>
+<h3>Problem 1: weaving triplets</h3>
+If any of the three input lists are empty, then stop weaving. 
+Otherwise, create a triplet (a three element list) from the first elements
+ of your input lists and cons the triplet onto the rest of the result. 
+<script src="https://gist.github.com/1477921.js?file=1.scm"></script>
+
+<h3>Problem 2a: is this a set?</h3>
+Our input is a set if either: 
+<ul>
+    <li>it's an empty list</li>
+    <li>its tail is a set and the tail doesn't contain the head element</li>
+</ul>
+<script src="https://gist.github.com/1477921.js?file=2a.scm"></script>
+
+<h3>Problem 2b: make a set</h3>
+Making a set from an empty list is easy, just return the empty list. 
+If our list is non-empty: 
+<ol>
+    <li>make a set from the list's tail</li>
+    <li>cons the head element onto the tail set if it's not already a member</li>
+</ol>
+<script src="https://gist.github.com/1477921.js?file=2b.scm"></script>
+
+<h3>Problem 2c: remove-elt</h3>
+There's nothing to remove from an empty list, so if you get one just
+return it. Otherwise, check whether the head of your list is the element
+you're supposed to remove. If it is, also remove that element from the
+rest of the list, otherwise cons the head element onto the recursive subresult. 
+
+<script src="https://gist.github.com/1477921.js?file=2c.scm"></script>
+
+<h3>Problem 2d: set-intersect</h3>
+The intersection of 'xs' and 'ys' will be a subset of xs. So simply go
+through all the elements of 'xs' and only include them in your result
+if they're also members of 'ys'. 
+<script src="https://gist.github.com/1477921.js?file=2d.scm"></script>
+
+<h3>Problem 2e: power-set</h3>
+I find that power-set is easier to understand if you first define the
+helper function 'cons-each'. This helper takes a list of lists and conses 
+some item onto each list. 
+The powerset then combines all the sets which make up the powerset of the
+rest of the list with those same sets including the head of our input. 
+<script src="https://gist.github.com/1477921.js?file=2e.scm"></script>
+
+<h3>Problem 2f: operations on nested sets</h3>
+The only thing tricky about this question was the need for
+<a href="http://en.wikipedia.org/wiki/Mutual_recursion">mutual recursion</a>
+between set-equal and set-member. It's otherwise a pretty straightforward
+reimplementation of functions above. 
+<script src="https://gist.github.com/1477921.js?file=2f.scm"></script>
+</div>
+</body>
+</html>
+

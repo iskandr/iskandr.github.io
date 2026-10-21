@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>Computational Photography - Homework 2</title>
+</head>
+<style type="text/css">
+	* { 
+		font-family: Verdana, Arial, sans-serif;
+		color: #333; 
+    }    
+	html { padding: 1em;  }
+	h1 { text-align: center; margin-bottom: 1em; }
+	h1, h2, h3 { clear: both;  }
+	h2 { text-decoration: underline; }
+	h3 { color: #533; }
+	.image { 
+		background-color: #eee;
+		float: left; 
+		padding: 1em;
+		padding-top: 0em;
+		margin-left: 1em;
+		margin-right: 2em;
+		margin-bottom: 1em;
+		
+	}
+	.image img { display: block; border: 1px solid #333; }
+	.image  .caption { 
+		font-size: 80%;
+        text-align: center; 
+		padding-bottom: 0.5em;
+		padding-top: 0.5em;
+	}
+	a, a:visited { color: blue; }
+</style>
+
+<body>
+	<h1>Computational Photography - Homework 2</h1>
+	
+	<h2>Convolution using Fast Fourier Transform</h2>
+	<p>Associated Matlab files: <a href="convtest.m">convtest.m</a></p>
+
+		<div class="image">
+			<div class="caption"></div>
+			<img src="convtest.jpg">
+		</div>
+		
+	<h2>Image blending</h2>
+	<p>Associated Matlab files: <a href="blend.m">blend.m</a>, <a href="blend_driver.m">blend_driver.m</a>
+	</p>
+		<div class="image">
+			<div class="caption">Image #1</div>
+			<img src="clownface_small.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Image #2</div>
+			<img src="japanese3.jpg">
+		</div>
+		
+		<div class="image" style="clear:both">
+			<div class="caption">Combined image</div>
+			<img src="blend.jpg">
+		</div>
+	<h2>Image denoising</h2>
+		<p>Associated Matlab files: <a href="denoise.m">denoise.m</a>
+		</p>
+		<div class="image">
+			<div class="caption">Original</div>
+			<img src="einstein_original.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Signal corrupted by noise</div>
+			<img src="einstein_noise.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Reconstructed image using Wiener denoising (PSNR = +28.92 dB)</div>
+			<img src="einstein_wiener.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Reconstructed image using wavelet coring (PSNR = +30.92 dB)</div>
+			<img src="einstein_coring.jpg">
+		</div>
+		
+		<h3>Band estimators</h3>
+		<div class="image">
+			<div class="caption">Estimator #1</div>
+			<img src="estimator1.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Estimator #2</div>
+			<img src="estimator2.jpg">
+		</div>
+		
+		<div class="image">
+			<div class="caption">Estimator #3</div>
+			<img src="estimator3.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Estimator #4</div>
+			<img src="estimator4.jpg">
+		</div>
+		
+		<div class="image">
+			<div class="caption">Estimator #5</div>
+			<img src="estimator5.jpg">
+		</div>
+</body>
+</html>

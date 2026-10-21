@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Monoids? In my programming language?</title>
+  <link rel="Stylesheet" href="text.css">
+	<style type="text/css">
+	th { background-color: #aaddff; }
+	td { background-color: #ffeecc; }
+	td, th { font-family: sans-serif; padding: 1em; border: 0px solid black; }
+	hr { width: 75%; border-width: 1px; }
+	</style>
+  <!--[if IE]>
+  <link rel="Stylesheet" href="../iefix.css">
+  <![endif]-->
+  </head>
+  <body>
+  <div id="container">
+    <div class="left">November 10, 2008</div>
+    <div class="right"><a href="../">Alex Rubinsteyn</a></div>
+    <h1>Monoids? In <em>my</em> programming language? <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>It's more likely than you think.</code></h1>
+
+<br>
+	<h2>What's a monoid?</h2>
+	<p>A monoid is a simple algebraic structure defined as a set <strong>M</strong> equipped with an operator <strong>*</strong> and a neutral element <strong>1</strong> such that the following properties hold: 
+	<pre>
+		<em><a href="http://en.wikipedia.org/wiki/Associativity">associativity</a></em>   &forall;x,y,z &isin; M: x*(y*z) <big><strong>=</strong></big> (x*y)*z
+		
+		<em><a href="http://en.wikipedia.org/wiki/Identity_element">identity</a></em>        &forall;x &isin; M: x*1 <big><strong>=</strong></big> 1*x <big><strong>=</strong></big> x
+		
+		<em><a href="http://en.wikipedia.org/wiki/Closure_(mathematics)">closure</a></em>         &forall;x,y &isin; M &exist;z &isin; M: x*y <big><strong>=</strong></big> z
+	</pre>
+	The operator might (but isn't required to) obey other properties like:
+	<pre>
+		<em><a href="http://en.wikipedia.org/wiki/Idempotency">idempotency<a/></em>   &forall;x &isin; M: x*x <big><strong>=</strong></big> x
+		
+		<em><a href="http://en.wikipedia.org/wiki/Commutativity">commutativity</a></em> &forall;x,y &isin; M: x*y <big><strong>=</strong></big> y*x
+	</pre>
+	
+	</p>
+	
+	<h2>Nice symbols, but what's the connection?</h2>
+	<p>In programming we often encounter <em><a href="http://en.wikipedia.org/wiki/Free_monoid">free monoids</a></em>, where elements of the set M are zero-or-more instances from some other underlying set. Free monoids are often described as strings over some alphabet (where the "alphabet" might consist of characters, integers, or WhizBangObjects).</p>
+<p>To see how a data structure can behave like a monoid, let's consider integer lists under the concatenation operation <code>++</code>. To be a monoid we need a neutral element in the set of lists. Empty lists fit the bill (since concatenating with an empty list is an identity operation). Formally, we can call this the monoid (<code><strong>List&lt;int&gt;</strong>, <strong>++</strong>, <strong>[]</strong></code>) or alternatively the free monoid over <code>int</code> values. 
+		<pre>
+		<em>example</em>		[1,2] ++ [3,4] = [1,2,3,4]  
+		<hr>
+		<em>associativity</em>   &forall;L<sub>1</sub>,L<sub>2</sub>,L<sub>3</sub> &isin; List&lt;int&gt;: (L<sub>1</sub>++L<sub>2</sub>)++L<sub>3</sub> <big><strong>=</strong></big> L<sub>1</sub>++(L<sub>2</sub>++L<sub>3</sub>)
+		
+		<em>identity</em>        &forall;L &isin; List&lt;int&gt;: L++[] = []++L = L
+		
+		<em>closure</em>         &forall;L<sub>1</sub>,L<sub>2</sub> &isin; List&lt;int&gt; &exist;L<sub>3</sub> &isin; List&lt;int&gt;: L<sub>1</sub>++L<sub>2</sub> <big><strong>=</strong></big> L<sub>3</sub>
+		</pre>
+		Are lists also idempotent or commutative? It's easy to see that they're not. 
+		<pre>
+		<em>not idempotent</em>  [7] ++ [7] <big><strong>=</strong></big> [7,7]
+				[7] <strong><big>&ne;</big></strong> [7,7]
+		
+		<em>not commutative</em>  [10] ++ [20] <big><strong>=</strong></big> [10,20]
+				 [20] ++ [10] <big><strong>=</strong></big> [20,10]
+				 [10,20] <big><strong>&ne;</strong></big> [20, 10]
+		</pre>
+		
+		Now, let's dream a little dream and say we magically made the <code>++</code> commutative. That is:
+		<pre>
+		[20] ++ [10] ++ [20] <big><strong>=</strong></big> [20,10,20] 
+				     <big><strong>=</strong></big> [10,20,20]  
+				     <big><strong>=</strong></big> [20,20,10]!
+		</pre>
+		What an odd situation. Clearly, we're not dealing with lists anymore. In fact, just by twiddling a single algebraic knob we've discovered <a href="http://en.wikipedia.org/wiki/Multiset">multisets</a>. If we were feeling particularly nerdy we could drop the word "multiset" altogether and just say "commutative free monoid". This is usually a winning strategy at parties. 
+	</p>
+	<p>	
+		Anyhow, let's push this bizarre situation a little further, and assert that <code>++</code> should be both commutative <strong>and</strong> idempotent. Now we get:
+		<pre>
+		[20] ++ [10] ++ [20] = [20] ++ [20] ++ [10] 
+		                     = [20] ++ [10] 
+				     = [20,10]
+		</pre>
+		Look ma, it's a <a href="http://en.wikipedia.org/wiki/Set_(computer_science)">set</a>!
+		</p>
+		<br><br>
+    <h2>The Basics</h2>
+    <table border="1" >
+	<tr>
+		<th>Datatype</th>
+		<th>Operator</th>
+		<th>Neutral Element</th>
+		<th>Algebraic Properties</th>
+	</tr>
+	
+	<tr>
+		<td>List&lt;T&gt;</td>
+		<td>List&lt;T&gt;.concat</td>
+		<td>empty list</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>Multiset&lt;T&gt;</td>
+		<td>Multiset&lt;T&gt;.union</td>
+		<td>empty multiset</td>
+		<td>commutative</td> 
+	</tr>
+	<tr>
+		<td>Set&lt;T&gt;</td>
+		<td>Set&lt;T&gt;.union</td>
+		<td>empty set</td>
+		<td>commutative, idempotent</td>
+	</tr>
+	</table>
+
+<h2>Addendum</h2>
+Some highlights from the reddit discussion:
+<div style="padding-left:1em;">
+<p>
+<a href="http://www.reddit.com/r/programming/comments/7cf4r/monoids_in_my_programming_language/c06adnx">cgibbard</a> presented a really neat use of monoids to combine comparison operators. 
+</p>
+<p><a href="http://www.reddit.com/r/programming/comments/7cf4r/monoids_in_my_programming_language/c06ajnj">sigfpe</a> wrote:
+<br> 
+<em>The most important insight I ever had relating mathematics and computating was when I suddenly realised that when a mathematician talks about 'abstraction' they mean exactly the same thing as a computer scientist. It's a shared interface onto a bunch of different objects.</em><br><br>
+
+<em>A monoid is a great example: the interface consists of an object called the identity and a function taking two arguments and returning one. There are then some rules about how these things interact. But the point is that both mathematics and computer science are full of things that 'expose' this interface. Groups, monoids, categories, rings, these are all just interfaces. And what's cool is that for each of these interfaces there are many objects that expose that interface, meaning that if you write code for the interface, the same code is reusable with all of those objects.
+</em></p>
+
+<p><a href="http://www.reddit.com/r/programming/comments/7cf4r/monoids_in_my_programming_language/c06a9ln">AlanCrowe</a>
+pointed out that I'm writing about something that's been named the <a href="http://groups.google.com/group/comp.lang.functional/browse_thread/thread/807eec007a84a5be?pli=1">Bloom Hierarchy</a>
+</p>
+
+<p><a href="http://www.reddit.com/r/programming/comments/7cf4r/monoids_in_my_programming_language/c06au37">otto_s</a> argued (convincingly) that functions under composition aren't isomorphic to containers of functions (but rather it's the syntactic terms associated with functions that are). To avoid confusion, I dropped the isomorphism from the table below.</p>	
+</div>
+
+	
+	<h2>A few more monoids</h2>
+	 <table border="1" >
+	 	<tr>
+		<th>Datatype</th>
+		<th>Operator</th>
+		<th>Neutral Element</th>
+		<th>Algebraic Properties</th>
+		<th>Isomorphic Monoids</th>
+	</tr>
+	<tr>
+		<td>String</td>
+		<td>String.concat</td>
+		<td>empty string</td>
+		<td></td>
+		<td>List&lt;Char&gt;</td>
+	</tr>
+	<tr>
+		<td>Nullable&lt;T&gt;</td>
+		<td style="width:10em">
+			op(x,y) = 
+			<br> &nbsp;if (x.HasValue)
+			<br> &nbsp;&nbsp;then x 
+			<br> &nbsp;&nbsp;else  y </td>
+		<td>null</td>
+		<td>idempotent</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>functions T&rarr;T</td>
+		<td>
+			composition
+		<td>id(x) = x</td>
+		<td><em>inherits algebraic properties of functions used (ie, if all functions used are commutative, then the composition monoid is also commutative)</em></td>
+		<td></td>
+	</tr>
+	</table>
+  </div>
+
+  </body></html>

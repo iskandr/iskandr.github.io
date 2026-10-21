@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Page not found — Alex Rubinsteyn</title>
+  <style>
+    body { max-width: 42em; margin: 4em auto; padding: 0 1em; font-family: Georgia, serif; color: #222; }
+    a { color: #276c8b; }
+    li { margin-bottom: 0.6em; }
+  </style>
+</head>
+<body>
+  <h1>Page not found</h1>
+  <p>This page may have moved. These links can help you find it:</p>
+  <ul>
+    <li><a data-site-path="/" href="/">Alex Rubinsteyn’s homepage</a></li>
+    <li><a data-site-path="/webdev.html" href="/webdev.html">Web Development</a></li>
+    <li><a data-site-path="/text/ocaml_links.html" href="/text/ocaml_links.html">Resources for Learning OCaml</a></li>
+    <li><a data-site-path="/genepool/" href="/genepool/">GenePool</a></li>
+  </ul>
+  <script>
+    const requestedPath = location.pathname.replace(/\/+$/, '') || '/';
+    const redirects = new Map([
+      ['/index.php', '/'],
+      ['/webdev.php', '/webdev.html'],
+      ['/text/ocaml_links.php', '/text/ocaml_links.html'],
+      ['/genepool/index.php', '/genepool/'],
+      ['/hps/RR_deriv.pdf', '/text/RR_deriv.pdf'],
+      ['/projects.html', '/']
+    ]);
+    document.querySelectorAll('[data-site-path]').forEach(link => {
+      link.href = link.dataset.sitePath;
+    });
+    if (redirects.has(requestedPath)) {
+      location.replace(redirects.get(requestedPath) + location.search + location.hash);
+    }
+  </script>
+</body>
+</html>

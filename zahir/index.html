@@ -1,0 +1,62 @@
+<html>
+<head><title>The Zahir Programming Language</title>
+<LINK rel=StyleSheet href="zahir_style.css"  type="text/css">
+</head>
+<body>
+
+<div id="container">
+<div id="right"><a href="../">Alex Rubinsteyn</a></div>
+<h1>Zahir</h1>
+<p>Zahir is an attempt to join the convenient syntax of Matlab with the structure, performance, and compile-time safety of a statically typed programming language. To learn a little more about the language you can check out a <a href="http://zahir-language.blogspot.com/2008/10/birth-of-language.html">blog post</a> I wrote (mostly about the type system). There's also an <a href="arraylang/v0.4.html">older version</a> which doesn't do an awful lot. Until I have more time, this page will probably serve mostly as a place to clarify thoughts and keep myself vaguely motivated. 
+</p>
+
+<h2>Unfinished Business</h2>
+<ul>
+<li>Implement constructors with arguments (currently 'type' keyword produces only enums)</li>
+<li>Implement constraint propagating type inference for inferring the appropriate classes associated with types</li>
+<li>Implement polyvariadic functions using the Zip Calculus</li>
+<li>Write a Sequence constructor class for polyvariadic map function</li>
+<li>Reimplement matrix to derive from Seq, giving automatic elementwise operations for all functions defined on scalars</li>
+<li>Rewrite typechecking of function calls to 
+	<ol>
+	<li><strike>attempt usual unification between args type and expected type</strike></li>
+	<li><strike>failing that, check if all sequences in args are same container</strike></li>
+	<li><strike>repeat type checking with contained types and return sequence of function result</strike></li>
+	</ol>
+</li>
+<li><strike>transform syntax tree at scalar expanded calls to use polyvariadic map</strike></li>
+<li><strike>Scrap special cases for unary &amp; binary operators, parse their usage as function calls</strike></li>
+<li><strike>Make all typenames capitalized, lowercase type identifiers should be automatic typevars</strike></li>
+<li><strike>Add a kind system</strike></li>
+<li><strike>Add constructor and type classes to the lexer and parser</strike></li>
+<li><strike>Drop row, col datatypes. Shape analysis of matrices should be a static step distinct from type checking.</strike></li>
+</ul>
+
+<h2>Background Reading</h2>
+<dl>
+<dt><a href="http://denif.ens-lyon.fr/data/langages_programmation_mpri/2007/pottier/slides-appsem-2005.pdf">A modern eye on ML type inference</a> by Francois Pottier</dt>
+<dd>Good overview of basic Hindley-Milner type inference (as well as extensions for recursive algebraic datatypes)</dd>
+
+
+<dt><a href="http://web.cecs.pdx.edu/~mpj/pubs/fpca93.pdf">A system of constructor classes: overloading and implicit higher-order polymorphism</a> by Mark P. Jones</dt>
+<dd>Extension to type class overloading adding support for higher-kinded types (such as trees, arrays, option types, etc..). </dd>
+
+
+<dt><a href="http://www.springerlink.com/index/f708k7m3211j558v.pdf">Type inference and implicit scaling</a> by Satish Thatte</dt>
+<dd>Promote scalars to array or list datatype by using map operator. Well, there's a ton more here, but that's the briefest summary. </dd>
+
+<dt><a href="http://www.cs.ttu.edu/~sequence/papers/cooke2005.pdf">Normalize, transpose, and distribute: An automatic approach for handling nonscalars</a> by Daniel Cooke, et al.</dt>
+<dd>A dynamic semantics for scalar expansion/implicit scaling. Lots of potential (underutilized?) with Thatte's work above.</dd>
+
+<dt><a href="http://www.cs.yale.edu/homes/tullsen/zip-rr.ps">The Zip Calculus</a> by Mark Tullsen</dt>
+<dd>Genericity over tuple length (ie, write zipWith2, zipWith3, and friends as just one function)</dd>
+
+<dt><a href="https://uhra.herts.ac.uk/dspace/bitstream/2299/847/1/900921.pdf">General Homomorphic Overloading</a> by Alex Shafarenko and Sven-Bodo Scholz</dt>
+<dd>Every overloaded operator is associated with a linear ordering over the valid types of its arguments. This, unfortunately, doesn't work for function arguments: the presented type system doesn't support higher order functions. </dd>
+
+</dl>
+</div>
+
+</body>
+
+</html>

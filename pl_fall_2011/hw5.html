@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Programming Languages (Fall 2011) - Homework 5 Solution</title>
+<link rel=StyleSheet href="pl.css" type="text/css" media=screen>
+</head>
+<body>
+<div id="rightlink">
+<a href="http://cs.nyu.edu/courses/fall11/CSCI-GA.2110-001/">Programming Languages - Fall 2011</a>
+</div>
+<div id="content">
+<h1>Homework 5 Solution</h1>
+<p>
+In general, there are two important criteria for whether you "got" this assignment. 
+First, did you get the right answer for <code>fact(300)</code>? Check against the actual value <a href="http://micro.stanford.edu/~caiwei/Download/factorial.php">here</a>. 
+</p>
+<p>
+Secondly, and more importantly, did you code in idiomatic C++? Your factorial function should look almost identical to one you would write with a native number type 
+(differing only in the argument and return types). For example:
+<script src="https://gist.github.com/1473481.js?file=fact.cpp"></script>
+If your factorial function is packed with details about your specific
+number class you're probably not using operator overloading correctly. 
+</p>
+<p>
+Also, below you'll notice below that I side-stepped the whole messy issuing of 
+deallocating mantissas by using a reference counting pointer. Another safe (slightly less efficient) option would be to 
+store vectors by value. If, however, your mantissa was a naked array then you needed to implement the 
+<a href="http://drdobbs.com/cpp/184401400">holy trinity</a>: a copy constructor, a destructor, and an assignment operator.  
+</p>
+<h2>My Implementation</h2>
+<script src="https://gist.github.com/1473481.js?file=hw5.cpp"></script>
+</div>
+</body>
+</html>
+

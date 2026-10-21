@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>Programming Languages (Fall 2011) - Homework 1 Solution</title>
+<link rel=StyleSheet href="pl.css" type="text/css" media=screen>
+</head>
+<body>
+<div id="rightlink">
+<a href="http://cs.nyu.edu/courses/fall11/CSCI-GA.2110-001/">Programming Languages - Fall 2011</a>
+</div>
+<div id="content">
+<h1>Homework 1 Solution</h1>
+<dl>
+<dt>Problem 1</dt>
+<dd>
+<ol type='a'>
+<!-- 1a -->
+<li>
+It's easy to demonstrate that this grammar is <em>at least</em> left associative for a given string. For example, we can derive the 
+string "X+Y+Z" from the substitution sequence:
+<blockquote>
+<em>E</em> &rarr; <em>E '+' T</em> &rarr; <em>(E '+' T) '+' T</em> &rarr; 
+<em>(T '+' T) '+' T</em> &rarr; <em>(ID '+' ID) '+' ID</em>
+</blockquote>
+It's trickier to demonstrate that this is possible for all strings and even more difficult to show that 
+the right-associative parse isn't possible in general. However, this question wasn't asking for a formal proof but rather
+for intuition. Any answer should be fine if it at least contains the thought: <em>This grammar is left-associative because its rules only refer to themselves on the left side of binary operators. </em> </li>
+</li>
+
+<!-- 1b -->
+<li>
+The rule <code>P</code> must refer to itself on the <em>right</em> side of the exponentiation operator. 
+
+<blockquote>
+     E ::=  E + T | T<br/>
+     T ::=  T * P | P<br/>
+     P ::=  ID ** P | ID <br/>
+</blockquote>
+</li>
+
+<!-- 1c -->
+<li>
+"A**B**C" is not valid Ada syntax. This is because the Ada grammar production <code>factor</code> 
+is not recursive and requires a <code>primary</code> (ie: number, variable, etc...) on either side of the exponentiation operator. 
+A common source of confusion appears to have been the loose conventions of some online Ada grammars, where unquoted parentheses are used 
+as terminals rather. Instead of the clearer <code>primary ::= "(" expression ")"</code> you might have instead seen <code>primary ::= (expression)</code>. 
+This does not mean that you can substitute expressions for primaries!
+<br/><br/>
+<em>Prof. Schonberg adds:</em> It's worth mentioning that the precedence and associativity of operators is a common source of
+errors in most languages, because people simply forget what the precedences are (very common source of errors in C, which has
+something like 13 levels of precedence).  The advice is always:  "When in doubt, parenthesize",  The issue with exponentiation is
+that most languages make all their grammars left-associative, but Fortran decided that  A ** B ** C would be more useful as A ** (B ** C)
+because  (A **B ) ** C is just A ** (B * C).  For somebody doing scientific computation that is a reasonable choice, but given that it
+goes against common rules in other languages, it's just a source of confusion.  C decided not to have a exponentiation operation at all,
+and Ada chose a rule that forces you to parenthesize.
+
+</li>
+</ol>
+
+
+
+
+</dd>
+
+<dt>Problem 2</dt>
+<dd>
+<ol type='a'>
+<!-- 2a -->
+<li>
+Some interesting properties to the specified language:
+    <ul>
+    <li>The number of <em>a</em>'s in a string is always greater than or equal to the number of <em>b</em>'s.</li>
+    <li>Every string in the language is either empty or starts with an <em>a</em>.
+    <li>The prefix of any string has more <em>a</em>'s than <em>b</em>'s.</li>
+    </ul>
+</li>
+<!-- 2b -->
+<li>
+Derivations:
+<blockquote>S &rarr; aS &rarr; a(aSbS) &rarr; aab &nbsp; &nbsp; </blockquote>
+and
+<blockquote>S &rarr; aSbS &rarr; a(aS)bS &rarr; aab </blockquote>
+The parse trees corresponding to these two derivations should look something like:
+<big>
+<pre>
+    S              S
+    |              |              
+    aS            aSbS 
+     |             |  \
+     aSbS          aS  &epsilon;
+      | |           |
+      &epsilon; &epsilon;           &epsilon; 
+</pre>
+</big>
+</li>
+</ol>
+</dd>
+
+<dt>Problem 3</dt>
+<dd>
+C++: 
+<pre>
+int fast_exp(int base, int exponent) { 
+    int result = 1; 
+    int power = base;
+    while (exponent &gt; 0) { 
+      if (exponent % 2) { result *= power; }
+      power *= power;
+      exponent /= 2;
+    }
+    return result;
+}
+</pre>
+Python:
+<pre>
+  def fast_exp(base, exponent):
+    result = 1 
+    power = base 
+    while exponent > 0:
+      current_bit = (exponent % 2 == 1)
+      if current_bit: result *= power
+      power *= power
+      exponent /= 2
+    return result
+</pre>
+OCaml:
+<pre>
+let rec fast_exp x = function 
+  | 0 -> 1 
+  | n -> 
+     let x' = power x (n / 2) in 
+     x' * x' * (if n mod 2 == 0 then 1 else x)
+</pre>
+
+Any implementation using the default integer type in C, C++, C#, Java, OCaml, and most other languages will 
+silently overflow when you try to compute 20^20. The desired behavior (implemented by Python and a few other clever languages), is to automatically detect overflow and cast up to an arbitrary-precision integer type. 
+<br/><br/>
+If you used a floating number type then you will get the correct answer for 20^20 but wrong answers for larger exponents (such as 20^25). Some of you went beyond the requirements of the question
+and actually implemented an arbitrary-precision number type yourselves, kudos!
+
+
+</dd>
+
+
+</dl>
+
+</div>
+</body>
+</html>
+

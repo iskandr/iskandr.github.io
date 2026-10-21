@@ -1,0 +1,42 @@
+  .comment { color: green; }
+    .cpp { color: blue; white-space: pre; font-family: monospace; }
+    .panang { color: #422; white-space: pre; font-family: monospace; }
+    .haskell { color: chocolate; white-space: pre; font-family: monospace;  }
+    #container 
+    {
+    		position: relative; 
+    		border:1px solid #666; 
+    		margin: 2em auto; 
+    		width: 54em; 
+    		padding:3em; 
+    		background-color: white;
+    }
+    body { 
+    		background-color: #ccc;		
+		}
+    .right {position: absolute; border-left: 1px solid #666;  
+            border-bottom: 1px solid #666; 
+            right: 0em; 
+            font-size: 1.2em; 
+            top: 0em;
+            padding: 0.5em;
+            background-color: #eee;
+            }
+    .left
+    {
+    	display: none;
+    	position: absolute;
+    	left: 3em;
+    	top: 1em;
+    	font-size: 0.95em;
+    	color: #555;
+    	font-style: italic;
+    }
+    h1 { margin-top: 1.3em;}
+	
+	code, pre { font-size: 1.2em; }
+	p { width: 90%; margin-top: 0em;  }
+	h2 { margin-bottom: 0.2em; }
+	sup { font-size: 0.8em; }
+	p sup {  vertical-align: top;}
+	ol { margin-bottom: 0.4em;  margin-top: 0.4em;}

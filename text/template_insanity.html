@@ -1,0 +1,835 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" 
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Template Insanity</title>
+   <link rel="Stylesheet" href="text.css">
+  	<!--[if IE]>
+		<style type="text/css">
+			.cpp, .haskell, .panang
+			{
+				font-size: 0.9em;
+			}
+		 </style>
+	<![endif]-->
+  </head>
+  <body>
+  <div id="container">
+    <div class="left">November 10, 2007</div>
+    <div class="right"><a href="../">Alex Rubinsteyn</a></div>
+    <h1>Almost Solving <em>Instant Insanity</em> with C++ templates</h1>
+    <p>
+    In the latest edition of the <a href="http://www.haskell.org/haskellwiki/The_Monad.Reader">Monad Reader</a>,
+    <a href="http://www.kfish.org">Conrad Parker</a> wrote a solution to 
+    <a href="http://en.wikipedia.org/wiki/Instant_Insanity">Instant Insanity</a> using only  Haskell's type system.
+    While reading, I was immediately struck by how closely Haskell's parameterized types correspond to C++ templates. To see how far
+    I could push this connection, I endeavoured to translate Conrad's code into a C++ metaprogram. I should admit up front
+    that my translated code doesn't quite perform its intended task. The solution in the Monad Reader involves an exhaustive search
+    of compatible cube orientations, which pushes Visual C++ past its dainty limits. However, the code does appear to be correct
+    (it works for 1-3 cubes), and the process of writing it taught me a great deal about type-level programming (both in C++ and Haskell).
+    </p>
+	
+    <h2>A brief introduction to C++ metaprogramming</h2>
+    <p>
+    Since not many people are familiar with C++'s capacity for compile-time computation, it's probably worthwhile to give a 
+    short introduction to programming with templates. If you're already a dark wizard of metaprogramming, 
+    skip along to the next section. Now, templates were added to C++ to enable generic programming (much to the delight of <a 
+    href="http://www.sgi.com/tech/stl/drdobbs-interview.html">Alexander Stepanov</a>). It wasn't initially obvious
+    that they could be used for much besides containers and generic algorithms. Several years after the introduction of templates into
+    the C++ standard, Eric Unruh <a href="http://ubiety.uwaterloo.ca/~tveldhui/papers/Template-Metaprograms/meta-art.html">discovered</a> 
+    that they formed a Turing-complete compile-time programming language. 
+    Here's the code that revolutionized the modern programming world:
+    </p>
+    <div class="cpp">
+    template&lt;int N&gt;
+    class Factorial {
+    public:
+    enum { value = N * Factorial&lt;N-1&gt;::value };
+    };
+
+    class Factorial&lt;1&gt; {
+    public:
+    enum { value = 1 };
+    };
+    </div>
+    <p>
+    When this fragment is compiled the Factorial class will be instantiated for some integer value of N. Factorial&lt;N&gt;
+    instantiates the type Factorial&lt;N-1&gt;, which in turn instantiates Factorial&lt;N-2&gt;, and so on. Finally,
+    the base case of Factorial&lt;1&gt; is reached and the chain of template expansions halts. Though very 
+    simple, the above code teaches us most of what we need to know about C++ metaprogramming. 
+    </p>
+    <ul>
+    <li>
+    There are no assignments in this metaprogram. Once a variable is defined it will retain its value forever. 
+    C++ templates are a great example of a pure  <em><a href="http://en.wikipedia.org/wiki/Functional_programming">functional programming language</a></em>.  Mutation is simply not an option. 
+    </li>
+    <li>
+    The above code is recursive. In fact, all metaprograms are recursive. There is no other way to loop or repeat code.
+    </li>
+    <li>
+    Control flow is achieved through pattern matching. How much more like Haskell can we get?
+    </li>
+    </ul>
+    <p>
+    So, even though templates generate C++ code, they themselves are a completely different model of computation.
+    If you want to understand how templates work, you'll find lambda calculus more useful than knowledge about
+    C++'s run-time semantics.        
+    </p>
+    <p>
+    Note: <em> if you are considering using template metaprogramming for a non-trivial task I would 
+    <strong>strongly</strong> advise you to use <a href="http://www.boost.org/libs/mpl/doc/index.html">Boost.MPL</a>. The madmen at Boost spend their time probing the arcane depths of compiler bugs so you don't have to! 
+    I give this advice hypocritically, since I've never installed Boost on my machine. However, I'm more interested 
+    in how metaprogramming works than using it for anything productive.</em>
+    </p>
+    <h2>Converting Haskell into C++</h2>
+     <p>
+     Here's a quick summary of how we can map the Haskell code in the Monad Reader to C++. In the following code snippet Haskell is colored
+     <span class="haskell">maroon</span> and C++ is in <span class="cpp">blue</span>. 
+     </p>
+    <dl>
+    <dt>Atomic types</dt>
+    <dd>
+      <div class="haskell">
+      data R
+      </div>
+    </dd>
+    <dd>
+      <div class="cpp">
+      struct R {};
+      </div>
+    </dd>
+    <dt>
+      Parameterized types
+    </dt>
+    <dd>
+      <div class="haskell">
+      data Cube u f r b l d
+      </div>
+    </dd>
+    <dd>
+      <div class="cpp">
+      template &lt;U, F, R, B, L, D&gt;
+      struct Cube
+      {
+        typedef U u; typedef F f; typedef R r; 
+        typedef B b; typedef L l; typedef D d;
+      };
+      </div>
+    </dd>
+    <dt>Type aliases</dt>
+    <dd>
+      <div class="haskell">
+      type CubeRed = Cube R R R R R R
+      </div>
+    </dd>
+    <dd>
+      <div class="cpp">
+      typedef Cube&lt;R,R,R,R,R,R&gt; CubeRed;
+      </div>
+    </dd>
+    <dt>
+      Type functions
+    </dt>
+    <dd>
+      <div class="haskell">
+      class Transforms u f r b l d where
+        rot :: Cube u f r b l d &rarr; Cube u r b l f d
+       </div>
+     </dd>
+     <dd>
+      <div class="cpp">
+        template &lt;typename C&gt;
+        struct rot
+        {
+          typedef Cube&lt;typename C::u, typename C::r, typename C::b, typename C::l, 
+                          typename C::f, typename C::d&gt; result;
+        };
+        </div>
+      </dd>
+      <dt>
+        Functional dependency
+      </dt>
+      <dd>
+      <div class="haskell">
+      class And b1 b2 b | b1 b2 &rarr; b where
+        and ::b1 &rarr; b2 &rarr; b
+    
+      instance And True True True where and = <img src="../images/bottom.png" alt="bottom" >
+      instance And True False False where and = <img src="../images/bottom.png" alt="bottom" >
+      instance And False True False where and = <img src="../images/bottom.png" alt="bottom" >
+      instance And False False False where and = <img src="../images/bottom.png" alt="bottom" >
+      </div>
+      </dd>
+      <dd>
+      <div class="cpp">
+      template&lt;typename b1, typename b2&gt;
+      struct And
+      {
+        typedef False result;
+      };
+      
+      template &lt;&gt;
+      struct And&lt;True, True&gt;
+      {
+        typedef True result;
+      };
+      </div>
+      </dd>
+      <dt>
+      Type lists
+      </dt>
+      <dd>
+        <div class="haskell">
+        data Nil
+        data x ::: xs
+        infixr 5 :::
+        </div>
+      </dd>
+      <dd>
+        <div class="cpp">
+        struct Nil {};
+        
+        <span class="comment"> //C++ doesn't allow infix cons like haskell</span>
+        template &lt;typename Car, typename Cdr&gt;
+        struct Cons
+        {
+          typedef Car car;
+          typedef Cdr cdr;
+        };
+        </div>
+      </dd>
+      <dt>
+        Higher order metafunctions
+      </dt>
+      <dd>
+        <div class="haskell">
+        class Map f xs zs | f xs &rarr; zs where
+          map :: f &rarr; xs &rarr; zs
+        
+        instance Map f Nil Nil where map = <img src="../images/bottom.png" alt="bottom" >
+        
+        instance (Apply f x z, Map f xs zs)
+          &rArr; Mapf (x ::: xs) (z ::: zs) where map = <img src="../images/bottom.png" alt="bottom" >
+        
+        </div>
+      </dd>
+      <dd>
+        <div class="cpp">
+        template &lt;typename f, typename xs&gt;
+        struct Map
+        {
+          typedef Cons&lt;f&lt;typename xs::car&gt;::result, Map&lt;f, typename xs::cdr&gt;::result&gt; result; 
+        };
+        
+        template &lt;typename f&gt;
+        struct Map&lt;f, Nil&gt;
+        {
+          typedef Nil result;
+        };
+        </div>
+        
+        </dd>
+        
+    </dl>
+    
+    <h2>C++ vs. Haskell: Type-Level Deathmatch</h2>
+    <h3>C++ 's advantages</h3>
+    <p>
+    There are a few spots where's C++'s unwieldly Turing-complete type system is actually better for metaprogramming
+    than Haskell's unwieldly Turing-complete type system. C++ has a slightly more advanced notion of type identity. 
+    Whereas Haskell requires a full enumeration of possible arguments to implement a not-equals metafunction for colors, you
+    can do it in C++ with simple pattern matching.
+    Compare the following verbose Haskell code: 
+    </p>
+    <div class="haskell">
+    instance NE R R False where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE R G True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE R B True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE R W True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE G R True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE G G False where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE G B True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE G W True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE B R True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE B G True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE B B False where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE B W True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE W R True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE W G True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE W B True where ne = <img src="../images/bottom.png" alt="bottom" >
+    instance NE W W False where ne = <img src="../images/bottom.png" alt="bottom" >
+    </div>
+    <p>
+    with a more succinct (and general) version in C++:
+    </p>
+
+    <div class="cpp">
+    template &lt;typename S, typename T&gt;
+    struct NE
+    { 
+      typedef True result; 
+    };
+    
+    template &lt;typename S&gt;
+    struct NE&lt;S,S&gt;
+    {
+      typedef False result; 
+    };
+    </div>
+
+    <p>
+    Another advantage C++ has over Haskell is the ability to partially apply type parameters. 
+    What does that mean?
+    Well, consider the following (rather useless) type-level function <code>ChooseSecond</code> which accepts two types, <code>T1</code> and <code>T2</code>, and yields as its value.
+    </p>
+    <div class="cpp">
+      template &lt;typename T1, typename T2&gt;
+      struct ChooseSecond
+      {
+        typedef T2 result;
+      }; 
+      </div>
+     <p>Now, when we're computing with types it's sometimes useful to distinguish between various kinds of types. 
+     The kind of our metafunction <code>ChooseSecond</code> is <code>* &rarr; * &rarr; *</code>, meaning it accepts two 
+     types and returns a third. If we attempt to apply just one type (as in <code>ChooseFirst&lt;int&gt;</code>) we'll rightfully get a compiler error.  
+     Similarly, if you attempt to apply just one type parameter to a Haskell datatype which expects two, the Haskell compiler will taser you through the keyboard.
+     However, by adjusting our expectations of how C++ type-functions are laid out and inserting a layer of indirection, we can actually achieve partial type application. 
+     Instead of accepting type parameters directly, we delegate their use to an inner struct named <code>apply</code>. 
+     This allows us to ignore the differences between types and type functions (they now all have a kind of <code>*</code>). 
+    </p>
+    <div class="cpp">
+      struct ChooseSecond
+      {
+        template &lt;typename T1, typename T2&gt;
+        struct apply 
+        {
+          typedef T2 result;
+        };
+      }; 
+      
+      struct PApply
+      {
+        template &lt;typename F, typename T1&gt;
+        struct apply
+        {
+          struct result
+          {
+            template &lt;typename T2&gt;
+            struct apply
+            {
+              typedef typename F::apply&lt;T1, T2&gt;::result result;
+            };
+          };
+        };
+      };
+      
+      typedef PApply::apply&lt;ChooseSecond, int&gt;::result Fint;
+      typedef Fint::apply&lt;bool&gt;::result SomeType; <span class="comment">// SomeType = bool</span>
+      </div>
+       
+    <p>
+    I picked up the above indirection trick from <a href="http://www.boost.org/libs/mpl/doc/index.html">Boost.MPL</a> (which includes all sorts
+    of crazy things like anonymous type-level functions). Don't worry if you don't understand what's happening above, the important concept is 
+    that C++ allows us to treat types more freely then we could in Haskell. 
+    </p>
+    <h3>Haskell's advantages</h3>
+    <p>
+    Yes, C++'s templates are tremendously powerful. Unfortunately, there's a price to be paid for <em>accidentally</em>
+    implementing a programming language. When you write a compile-time program in C++, you are committing a crime against the
+    compiler...and the compiler won't hesitate to let you know that. If there's a bug in your code, you might
+    find yourself the unhappy recipient of several thousand error messages. This is where Haskell shines: its type system was 
+    actually intended to be powerful. When I attempt to evaluate my Instant Insanity metaprogram, Visual C++ 
+    consumes 2gb of memory before dying with a cryptic error message. Clearly, C++ compilers have a lot of catching
+    up to do. 
+    </p>
+    <p>
+    Another strong advantage of doing your type-level programming in Haskell is the availability of an interpreter. 
+    C++ templates exist beyond the reach of any debugger or code inspection tool. 
+    You write your metaprogram, compile, and pray.
+    Haskell, on the other hand, allows for an incremental style of development. A Haskell interpreter will allow you to
+    inspect the type and kind of every construct in your metaprogram. Type-level C++ programs
+    are, as a rule, heroic hacks. Haskell, on the other hand, provides a comparatively sane development experience.
+  </p>
+  <h2>The Code (or, Stop Reading Here)</h2>
+  <p>Since I suspect at most four  people will ever read this far, I can now reveal my dirty secret. 
+  I didn't really implement Instant Insanity in
+  C++ templates. I gave in to a much darker urge and wrote a layer of C preprocessor macros to generate my template code.
+  As a result I am now the inventor of the the world's ugliest, most brittle, and arguably most useless programming language. 
+  Feel free to use these macros however you want. Especially in large production systems.  
+  Without further ado, I give you Instant Insanity:
+  </p>
+  <div class="panang">
+  
+/* colors */
+SYMBOL(R); SYMBOL(G); SYMBOL(B); SYMBOL(W);
+
+/* cube structure */
+RECORD6(Cube, u, f, r, b, l, d);
+
+LET(Cube1, CREATE6(Cube, B, G, W, G, B, R));
+LET(Cube2, CREATE6(Cube, W, G, B, W, R, R));
+LET(Cube3, CREATE6(Cube, G, W, R, B, R, R));
+LET(Cube4, CREATE6(Cube, B, R, G, G, W, W));
+
+LET(Cubes, LIST4(Cube1, Cube2, Cube3, Cube4));
+
+/************************** 
+	Cube Transformations 		
+****************************/
+DEFUN1(Rotation, C)
+	RETURN(CREATE6(Cube, GET(C,u), GET(C,r), GET(C,b), GET(C,l), GET(C,f), GET(C,d))); 
+END
+DEFUN1(Twist, C)
+	RETURN(CREATE6(Cube,GET(C,f), GET(C,r), GET(C,u),GET(C,l),GET(C,d),GET(C,b)));
+END
+DEFUN1(Flip, C)
+	 RETURN(CREATE6(Cube,GET(C,d),GET(C,l),GET(C,b),GET(C,r),GET(C,f),GET(C,u)));
+END
+
+<div class="comments">
+//--Compute all 24 ways to orient a cube.
+//	haskell: orientations c =
+//				[c'''|c'<-[c, rot c, rot (rot c), rot(rot (rotc))],
+//					  c''<-[c', twist c', twist (twist c')],
+//					  c'''<-[c'', flip c'']]
+</div>
+DEFUN1(Rotations, C)
+	LET(rot, APPLY1(Rotation, C));
+	LET(rot2, APPLY1(Rotation, rot));
+	LET(rot3, APPLY1(Rotation, rot2));
+
+	RETURN(LIST4(C, rot, rot2, rot3));
+END
+
+DEFUN1(Twists, C)
+	LET(twist, APPLY1(Twist, C));
+	LET(twist2, APPLY1(Twist, twist));
+	
+	RETURN(LIST3(C, twist, twist2));
+END
+
+DEFUN1(Flips, C)
+	LET(flip, APPLY1(Flip, C));
+
+	RETURN(LIST2(C, flip));
+END
+
+DEFUN1(Orientations, C)
+	LET(rots, APPLY1(Rotations, C));
+	LET(twists, APPLY2(MapAppend, Twists, rots));
+
+	RETURN(APPLY2(MapAppend, Flips, twists));
+END
+
+<div class="comments">
+//--Two cubes are compatible if they have different colours on every visible face.
+//		haskell: compatible c c' = and [x/=x'|(x,x') &lt;- zip(visible c)(visible c')]
+</div>
+DEFUN2(Compatible, C1, C2)
+	LET(samefaces, LIST4(
+					APPLY2(NotEq, GET(C1, f), GET(C2, f)),
+					APPLY2(NotEq, GET(C1, b), GET(C2, b)),
+					APPLY2(NotEq, GET(C1, r), GET(C2, r)),
+					APPLY2(NotEq, GET(C1, l), GET(C2, l))));
+	RETURN(APPLY1(All, samefaces));
+END
+
+<div class="comments">
+//--Determine whether a cube can be added to pile of cubes, without
+//--invalidating the solution.
+//		haskell: allowed c cs = and[compatible c c'|c' &lt;- cs]
+</div>
+MATCH(Allowed)
+	DEFAULT2(cube, pile)
+		RETURN(IF(APPLY2(Compatible, cube, HD(pile)), 
+					APPLY2(Allowed, cube, TL(pile)), 
+					False));
+	ENDCASE
+
+	CASE1(cube, PATTERN2(cube, Nil))
+		RETURN(True);
+	ENDCASE
+ENDMATCH
+
+
+MATCH(MatchingOrientations)
+	DEFAULT2(orientations, solution)
+		LET(rest, APPLY2(MatchingOrientations, TL(orientations), solution)); 
+		LET(cube, HD(orientations)); 
+		RETURN(IF(APPLY2(Allowed, cube, solution), 
+					CONS(CONS(cube, solution), rest),
+					rest));
+	ENDCASE
+	CASE1(solution, PATTERN2(Nil, solution))
+		RETURN(Nil);
+	ENDCASE
+ENDMATCH
+
+MATCH(AllowedCombinations)
+	DEFAULT2(orientations, solutions)
+		LET(rest, APPLY2(AllowedCombinations, orientations, TL(solutions)));
+		LET(matching, APPLY2(MatchingOrientations, orientations, HD(solutions))); 
+		RETURN(APPLY2(Append, matching, rest));
+	ENDCASE
+	CASE1(orientations, PATTERN2(orientations, Nil))
+		RETURN(Nil);
+	ENDCASE
+ENDMATCH
+
+MATCH(Solutions)
+	DEFAULT1(cubes)
+		LET(cube, HD(cubes));
+		LET(orientations, APPLY1(Orientations, cube));
+		LET(sols, APPLY1(Solutions, TL(cubes)));
+		RETURN(APPLY2(AllowedCombinations, orientations, sols)); 		
+	ENDCASE
+	CASE0(PATTERN1(Nil))
+		RETURN(LIST1(Nil));
+	ENDCASE
+ENDMATCH
+
+
+MAIN
+	LET(cubes, LIST4(Cube1, Cube2, Cube3, Cube4));
+	LET(solutions, APPLY1(Solutions, cubes));
+	PRINT(solutions);
+END_MAIN
+</div>
+<h2>The Expanded Mess of C++</h2>
+<p>
+For completeness, I'm also posting the expanded version this program (care of cl.exe /P). 
+All structs and symbols have automatically generated string representations in the form
+of a static <code>to_s</code> function. The string representations are necessary to get 
+the results of the compile-time computation. This demonstrates how pervasively functional
+template metaprogramming is. Since output is a side effect, the results of a computation
+must be inspected from outside the metaprogram.  
+</p>
+<div class="cpp">
+struct TypeEnum
+{
+	enum  Value { Cons, Symbol, Record1, Record2, Record3, 
+                Record4, Record5, Record6, Record7, Record8, 
+                Function, Function1, Function2, Function3, Function4,
+			         	Function5, Function6, Function7, Function8, Int };
+};
+
+struct True { 
+  static const TypeEnum::Value metatype = TypeEnum::Symbol; 
+  static std::string to_s() { return "True"; } 
+};
+struct False { 
+  static const TypeEnum::Value metatype = TypeEnum::Symbol; 
+  static std::string to_s() { return "False"; } 
+};
+
+struct If { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename Truth, typename Tval, typename Fval&gt; 
+  struct apply {
+    typedef Fval result;
+	};
+	template &lt;typename Tval, typename Fval&gt; 
+  struct apply &lt;True, Tval, Fval&gt; {
+    typedef Tval result;
+	};
+};
+
+struct Nil
+{
+	static const TypeEnum::Value metatype = TypeEnum::Symbol;
+	static string to_s() { return "[]"; }
+
+};
+template &lt;typename argcar, typename argcdr&gt;
+struct ConsCell
+{	
+	static const TypeEnum::Value metatype = TypeEnum::Cons; 
+	typedef argcar car;
+	typedef argcdr cdr;
+	
+	typedef ConsCell&lt;car, cdr&gt; result;
+
+	static std::string to_s() 
+	{ 
+		return "[ " + car::to_s() +  " " + ConsPrinter&lt;cdr&gt;::to_s() + "]"; 
+	};
+
+	template &lt;typename elt&gt;
+	struct ConsPrinter
+	{	
+		static string to_s() { return Aux&lt;elt::metatype&gt;::to_s(); }
+
+		template&lt;TypeEnum::Value type&gt;
+		struct Aux { static string to_s() { return elt::to_s(); } };
+
+		template &lt;&gt;
+		struct Aux&lt;TypeEnum::Cons&gt;
+		{ 
+      static string to_s()  
+      {  
+        return elt::car::to_s() + " " + ConsPrinter&lt;elt::cdr&gt;::to_s();  
+      } 
+    };
+	};
+	
+	template &lt;&gt;
+	struct ConsPrinter&lt;Nil&gt;
+	{ static string to_s() { return ""; }  };
+};
+
+
+struct Cons { 
+  static const TypeEnum::Value metatype = TypeEnum::Function2; 
+  template &lt;typename car, typename cdr&gt; 
+  struct apply {
+	 typedef ConsCell&lt;car,cdr&gt; result;
+  }; 
+};
+
+struct NotEq { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename S, typename T&gt; 
+  struct apply {
+		typedef True result;
+	};
+	template &lt;typename S&gt; 
+  struct apply &lt;S, S&gt; {
+		typedef False result;
+	};
+};
+
+struct Append { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename List1, typename List2&gt; 
+  struct apply {
+    typedef ConsCell&lt;typename List1::car,
+      typename Append::apply&lt;typename List1::cdr,List2&gt;::result&gt; result;
+	};
+
+	template &lt;typename List2&gt; 
+  struct apply &lt;Nil, List2&gt; {
+    typedef List2 result; 
+  };
+};
+
+struct MapAppend { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename fn, typename list&gt; 
+  struct apply {
+    typedef typename fn::apply&lt;typename list::car&gt;::result ResultList;
+    typedef typename MapAppend::apply&lt;fn,
+      typename list::cdr&gt;::result RestOfList; 
+    typedef typename Append::apply&lt;ResultList,
+      RestOfList&gt;::result result;  
+  };
+	template &lt;typename fn&gt; 
+  struct apply &lt;fn, Nil&gt; {
+    typedef Nil result;
+	};
+};
+
+struct R { 
+  static const TypeEnum::Value metatype = TypeEnum::Symbol; 
+  static std::string to_s() { return "R"; } 
+}; 
+struct G { 
+  static const TypeEnum::Value metatype = TypeEnum::Symbol; 
+  static std::string to_s() { return "G"; } 
+}; 
+struct B { 
+  static const TypeEnum::Value metatype = TypeEnum::Symbol; 
+  static std::string to_s() { return "B"; } 
+}; 
+struct W { 
+  static const TypeEnum::Value metatype = TypeEnum::Symbol; 
+  static std::string to_s() { return "W"; } 
+};
+
+template &lt;typename arg_u, typename arg_f, typename arg_r, 
+  typename arg_b, typename arg_l, typename arg_d&gt; 
+struct Cube 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Record6; 
+  typedef arg_u u; typedef arg_f f; typedef arg_r r; 
+  typedef arg_b b; typedef arg_l l; typedef arg_d d; 
+  typedef Cube&lt;u, f, r, b, l, d&gt; result;
+  static std::string to_s() 
+  { 
+    return std::string("{") + "u:" +u::to_s() + ", " +  "f:"  + f::to_s() + ", " 
+                            + "r:" + r::to_s() + ", " + "b:"  +b::to_s() + ", " 
+                            + "l:" + l::to_s() + ", " + "d:"  + d::to_s() + "}"; } };
+
+typedef Cube&lt;B,G,W,G,B,R&gt; Cube1;
+typedef Cube&lt;W,G,B,W,R,R&gt; Cube2;
+typedef Cube&lt;G,W,R,B,R,R&gt; Cube3;
+typedef Cube&lt;B,R,G,G,W,W&gt; Cube4;
+
+struct Rotation 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; 
+  struct apply {
+	 typedef Cube&lt;typename C::u,typename C::r,
+            typename C::b,typename C::l,typename C::f,
+            typename C::d&gt; result; 
+  }; 
+};
+
+struct Twist 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; struct apply {
+	 typedef Cube&lt;typename C::f,typename C::r,typename C::u,
+      typename C::l,typename C::d,typename C::b&gt; result;
+  }; 
+};
+
+
+struct Flip 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; 
+  struct apply {
+	   typedef Cube&lt;typename C::d,typename C::l,typename C::b,typename C::r,
+      typename C::f,typename C::u&gt; result;
+  }; 
+};
+
+struct Rotations 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; struct apply {
+	 typedef typename Rotation::apply&lt;C&gt;::result rot;
+	 typedef typename Rotation::apply&lt;rot&gt;::result rot2;
+	 typedef typename Rotation::apply&lt;rot2&gt;::result rot3;
+
+	 typedef ConsCell&lt;C, ConsCell&lt;rot, ConsCell&lt;rot2, ConsCell&lt;rot3, Nil&gt; &gt; &gt; &gt; result;
+  }; 
+};
+
+struct Twists 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; 
+  struct apply {
+	 typedef typename Twist::apply&lt;C&gt;::result twist;
+	 typedef typename Twist::apply&lt;twist&gt;::result twist2;
+	
+  	typedef ConsCell&lt;C, ConsCell&lt;twist, ConsCell&lt;twist2, Nil&gt; &gt; &gt; result;
+  }; 
+};
+
+struct Flips 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; 
+  struct apply {
+	 typedef typename Flip::apply&lt;C&gt;::result flip;
+	 typedef ConsCell&lt;C, ConsCell&lt;flip, Nil&gt; &gt; result;
+  }; 
+};
+
+struct Orientations 
+{ 
+  static const TypeEnum::Value metatype = TypeEnum::Function1; 
+  template &lt;typename C&gt; 
+  struct apply {
+	 typedef typename Rotations::apply&lt;C&gt;::result rots;
+	 typedef typename MapAppend::apply&lt;Twists,rots&gt;::result twists;
+	 typedef typename MapAppend::apply&lt;Flips,twists&gt;::result result;
+  }; 
+};
+
+struct Compatible { 
+  static const TypeEnum::Value metatype = TypeEnum::Function2; 
+  template &lt;typename C1, typename C2&gt; 
+  struct apply {
+	 typedef ConsCell&lt;typename NotEq::apply&lt;typename C1::f,typename C2::f&gt;::result, 
+            ConsCell&lt;typename NotEq::apply&lt;typename C1::b,typename C2::b&gt;::result, 
+            ConsCell&lt;typename NotEq::apply&lt;typename C1::r,typename C2::r&gt;::result, 
+            ConsCell&lt;typename NotEq::apply&lt;typename C1::l,typename C2::l&gt;::result, 
+            Nil&gt; &gt; &gt; &gt; samefaces;
+	 typedef typename All::apply&lt;samefaces&gt;::result result;
+  }; 
+};
+
+struct Allowed { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename cube, typename pile&gt; 
+  struct apply {
+		typedef typename If::apply&lt;typename Compatible::apply&lt;cube,
+      typename pile::car&gt;::result,typename Allowed::apply&lt;cube,
+      typename pile::cdr&gt;::result,False&gt;::result result;
+	};
+
+	template &lt;typename cube&gt;
+  struct apply &lt;cube, Nil&gt; {
+		typedef True result;
+	};
+};
+
+struct MatchingOrientations { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+  template &lt;typename orientations, typename solution&gt; 
+  struct apply {
+    typedef typename MatchingOrientations::apply&lt;typename orientations::cdr,
+      solution&gt;::result rest; 
+    typedef typename orientations::car cube; 
+    typedef typename If::apply&lt;typename Allowed::apply&lt;cube,solution&gt;::result,
+      ConsCell&lt;ConsCell&lt;cube,solution&gt;,rest&gt;,rest&gt;::result result;
+	};
+	
+	template &lt;typename solution&gt; 
+  struct apply &lt;Nil, solution&gt; {
+		typedef Nil result;
+	};
+};
+
+struct AllowedCombinations { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename orientations, typename solutions&gt; 
+  struct apply {
+		  typedef typename AllowedCombinations::apply&lt;orientations,
+          typename solutions::cdr&gt;::result rest; 
+      typedef typename MatchingOrientations::apply&lt;orientations,
+        typename solutions::car&gt;::result matching; 
+		  typedef typename Append::apply&lt;matching,rest&gt;::result result;
+	};
+	
+	template &lt;typename orientations&gt; struct apply &lt;orientations, Nil&gt; {
+		typedef Nil result;
+	};
+};
+
+struct Solutions { 
+  static const TypeEnum::Value metatype = TypeEnum::Function;
+	template &lt;typename cubes&gt; 
+  struct apply {
+		typedef typename cubes::car cube;
+		typedef typename Orientations::apply&lt;cube&gt;::result orientations;
+		typedef typename Solutions::apply&lt;typename cubes::cdr&gt;::result sols;
+		typedef typename AllowedCombinations::apply&lt;orientations,sols&gt;::result result; 		
+	};
+	template &lt;&gt; struct apply &lt;Nil&gt; {
+		typedef ConsCell&lt;Nil, Nil&gt; result;
+	};
+};
+
+template &lt;typename T&gt; struct Main { static void exec() {
+	typedef ConsCell&lt;Cube1, ConsCell&lt;Cube2, ConsCell&lt;Cube3, ConsCell&lt;Cube4, Nil&gt; &gt; &gt; &gt; cubes;
+	typedef typename Solutions::apply&lt;cubes&gt;::result solutions;
+	std::cout &lt;&lt; solutions::to_s() &lt;&lt; std::endl;} 
+}; 
+
+int main(int argc, char* argv[]) 
+{ 
+  Main&lt;int&gt;::exec(); 
+  return 0;
+}
+</div>  
+  </div>
+
+  </body>
+</html>

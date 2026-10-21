@@ -1,0 +1,261 @@
+<html>
+<head>
+	<title>Texture Synthesis</title>
+</head>
+<style type="text/css">
+	* { 
+		font-family: Verdana, Arial, sans-serif;
+		color: #333; 
+    }    
+	html { padding: 1em; padding-top: 3em; }
+	h1 { text-align: center; }
+	h2 {  margin-top: 2em; }
+	h1, h2, h3 { clear: both;  }
+	h1 { text-decoration: underline; }
+	h2 { font-size: 1.3em; }
+	h3 { color: #533; }
+	
+	p { width: 65em; }
+	table { 		
+		background-color: #eee; 
+		padding: 1em; 
+		margin-top: 1em; 
+	} 
+	
+	th
+	{		
+		font-size: 80%;
+		text-align: center; 
+		padding-bottom: 0.5em;
+		padding-top: 0.5em;
+		font-weight: 0;
+	}
+	td
+	{
+		background-color: #eee;
+		padding: 1em;
+		padding-top: 0em; 
+		vertical-align: top;
+	}
+	td img 
+	{
+		display: block; border: 1px solid #333;	
+	}
+	p { margin-left: 1em; } 
+	/*.source { width: 200px;  }*/
+	a, a:visited { color: blue; }
+	.toplink
+	{
+		text-align: right; 
+		display: block; 
+		width: 100%; 
+
+	}
+	.toplink a {  text-decoration: none; padding: 0.2em; background-color: #eee; color: #39c; }
+</style>
+
+<body>
+	<div class="toplink">
+		<a href="http://www.rubinsteyn.com">Alex Rubinsteyn</a>
+	</div>
+	<h1>Texture Synthesis</h1>
+	<h2>Efros &amp; Leung's Algorithm</h2>
+	<p>Matlab source: <a href="https://github.com/iskandr/texture_synthesis/blob/master/synth.m">synth.m</a></p>
+	<p>Efros &amp; Leung's algorithm is remarkably simple. First, initialize a synthesized texture with a 3x3 pixel "seed" from the source texture. For every unfilled pixel which borders some filled pixels (I think of
+	this as a pixel on the 'frontier'), find a set of patches in the source image that most resemble the unfilled pixel's filled neighbors. Choose one of those patches at random and assign to the 
+		unfilled pixel a color value from the center of the chosen patch. Do this a few thousand times, and you're done. The only crucial parameter is how large of a neighborhood you consider when 
+searching for similar patches. As you can see in the examples below, as the "window size" increases, the resulting textures capture larger structures of the source image. If you want to implement this algorithm, 
+there are some finer details you should read about in the paper linked below.</p>
+<p> I implemented this as a homework for  <a href="http://www.cs.nyu.edu/~fergus/">Rob Fergus</a>' Computational Photography class. If you're interested in this sort of thing, check out the 
+<a href="http://www.cs.nyu.edu/~fergus/teaching/comp_photo/index.html">course website</a>, which has many more interesting papers. 	</p>
+	<p>Reference: <a href="http://graphics.cs.cmu.edu/people/efros/research/EfrosLeung.html">Texture Synthesis by Non-parametric Sampling</a></p>
+	<table align="center">
+	<tr><th>Source</th>
+	<th>3 x 3 window</th>
+	<th>5 x 5 window</th><th>7 x 7 window</th><th>11 x 11 window</th>
+	<th>15 x 15 window</th>
+	<th>19 x 19 window</th>
+	
+	<tr>
+		<td><img src="D20.png"></td>
+		<td><img src="results/D20_3.jpg"></td>
+		<td><img src="results/D20_5.jpg"></td>
+		<td><img src="results/D20_7.jpg"></td>
+		<td><img src="results/D20_11.jpg"></td>
+		<td><img src="results/D20_15.jpg"></td>
+		<td><img src="results/D20_19.jpg"></td> 
+	</tr>
+	
+
+	<tr>
+		<td><img src="cheetah.jpg"></td>
+		
+		<td><img src="results/cheetah_3.jpg"></td>
+		<td><img src="results/cheetah_5.jpg"></td>
+		<td><img src="results/cheetah_7.jpg"></td>
+		<td><img src="results/cheetah_11.jpg"></td>
+		<td><img src="results/cheetah_15.jpg"></td>
+		<td><img src="results/cheetah_19.jpg"></td> 
+	</tr>
+	
+	<tr>
+		<td><img src="call3.jpg"></td>
+		<td><img src="results/call3_3.jpg"></td>
+		<td><img src="results/call3_5.jpg"></td>
+		<td><img src="results/call3_7.jpg"></td>
+		<td><img src="results/call3_11.jpg"></td>
+		<td><img src="results/call3_15.jpg"></td>
+		<td><img src="results/call3_19.jpg"></td> 
+	</tr>
+
+	<tr>
+		<td><img src="metal_small.bmp"></td>
+		<td><img src="results/metal_small_3.jpg"></td>
+		<td><img src="results/metal_small_5.jpg"></td>
+		<td><img src="results/metal_small_7.jpg"></td>
+		<td><img src="results/metal_small_11.jpg"></td>
+		<td><img src="results/metal_small_15.jpg"></td>
+		<td><img src="results/metal_small_19.jpg"></td> 
+	</tr>
+	<!--
+	<tr>
+		<td><img src="efros_small2.jpg"></td>
+		<td><img src="results/efros_small2_5.jpg"></td>
+		<td><img src="results/efros_small2_7.jpg"></td>
+		<td><img src="results/efros_small2_11.jpg"></td>
+		<td><img src="results/efros_small2_15.jpg"></td>
+		<td><img src="results/efros_small2_19.jpg"></td>
+	</tr>
+	-->
+		
+	<tr>
+		<td><img src="fire.jpg"></td>
+		<td><img src="results/fire_3.jpg"></td>
+		<td><img src="results/fire_5.jpg"></td>
+		<td><img src="results/fire_7.jpg"></td>
+		<td><img src="results/fire_11.jpg"></td>
+		<td><img src="results/fire_15.jpg"></td>
+		<td><img src="results/fire_19.jpg"></td> 
+	</tr>
+	
+	<tr>
+		<td><img src="bw_wood2.jpg"></td>
+		<td><img src="results/bw_wood2_3.jpg"></td>
+		<td><img src="results/bw_wood2_5.jpg"></td>
+		<td><img src="results/bw_wood2_7.jpg"></td>
+		<td><img src="results/bw_wood2_11.jpg"></td>
+		<td><img src="results/bw_wood2_15.jpg"></td>
+		<td><img src="results/bw_wood2_19.jpg"></td> 
+	</tr>
+	
+	<tr>
+		<td><img src="african_face1.jpg"></td>
+		<td><img src="results/african_face1_3.jpg"></td>
+		<td><img src="results/african_face1_5.jpg"></td>
+		<td><img src="results/african_face1_7.jpg"></td>
+		<td><img src="results/african_face1_11.jpg"></td>
+		<td><img src="results/african_face1_15.jpg"></td>
+		<td><img src="results/african_face1_19.jpg"></td> 
+	</tr>
+	
+	
+	<tr>
+		<td><img src="chinese.bmp"></td>
+		<td><img src="results/chinese_3.jpg"></td>
+		<td><img src="results/chinese_5.jpg"></td>
+		<td><img src="results/chinese_7.jpg"></td>
+		<td><img src="results/chinese_11.jpg"></td>
+		<td><img src="results/chinese_15.jpg"></td>
+		<td><img src="results/chinese_19.jpg"></td> 
+	</tr>
+	
+	</table>
+	
+	<h2>Parametric Synthesis: Not So Great</h2>
+	<p>Matlab source: <a href="synth_gmm.m">synth_gmm.m</a>, <a href="EM_GM.m">EM_GM.m</a></p>
+	<p>I started from Efros &amp; Leung's algorithm and rewrote it to use an explicit patch density model.  Instead of measuring the distance from the current
+	synthesized patch to every patch in the original image, I sample a few patches from a Gaussian mixture model and use the sample with lowest distance. This trades a terrible start-up
+cost (waiting for EM to converge) for a much quicker per-pixel running time. If the visual performance were comparable, this scheme
+would be well-suited for synthesizing large textures. Unfortunately, the results from the mixture model don't look so great. When I have time, I'm hoping to try this with a Restricted Boltzmann Machine.
+ 	</p>
+
+	<table align="center">
+	<tr><th>Source</th>
+		<th>3 x 3 window</th>
+		<th>5 x 5 window</th>
+		<th>7 x 7 window</th>
+		<th>11 x 11</th>
+	<!--	<th>15 x 15 window</td> -->
+	</tr>
+	<tr>
+		<td><img src="D20_gray.jpg"></td>
+		<td><img src="gmm_results/D20_3.jpg"></td>
+		<td><img src="gmm_results/D20_5.jpg"></td>
+		<td><img src="gmm_results/D20_7.jpg"></td>
+		<td><img src="gmm_results/D20_11.jpg"></td>
+	<!--	<td><img src="gmm_results/D20_15.jpg"></td> -->
+	</tr>
+		<tr>
+		<td><img src="metal_small_gray.jpg"></td>
+		<td><img src="gmm_results/metal_small_3.jpg"></td>
+		<td><img src="gmm_results/metal_small_5.jpg"></td>
+		<td><img src="gmm_results/metal_small_7.jpg"></td>
+		<td><img src="gmm_results/metal_small_11.jpg"></td>
+	<!--	<td><img src="gmm_results/metal_small_15.jpg"></td> -->
+	</tr>
+
+	<tr>
+		<td><img src="cheetah_gray.jpg"></td>
+		<td><img src="gmm_results/cheetah_3.jpg"></td>
+		<td><img src="gmm_results/cheetah_5.jpg"></td>
+		<td><img src="gmm_results/cheetah_7.jpg"></td>
+	<!--	<td><img src="gmm_results/cheetah_11.jpg"></td> -->
+	<!--	<td><img src="gmm_results/cheetah_15.jpg"></td> -->
+	</tr>
+	
+	<tr>
+		<td><img src="call3_gray.jpg"></td>
+		<td><img src="gmm_results/call3_3.jpg"></td>
+		<td><img src="gmm_results/call3_5.jpg"></td>
+		<td><img src="gmm_results/call3_7.jpg"></td>
+	<!--	<td><img src="gmm_results/call3_11.jpg"></td> -->
+	<!--	<td><img src="gmm_results/call3_15.jpg"></td> -->
+	</tr>
+
+
+		
+	
+	<tr>
+		<td><img src="bw_wood2_gray.jpg"></td>
+		<td><img src="gmm_results/bw_wood2_3.jpg"></td>
+		<td><img src="gmm_results/bw_wood2_5.jpg"></td>
+		<td><img src="gmm_results/bw_wood2_7.jpg"></td>
+	<!--	<td><img src="gmm_results/bw_wood2_11.jpg"></td> -->
+	<!--	<td><img src="gmm_results/bw_wood2_15.jpg"></td> -->
+	</tr>
+	
+	<tr>
+		<td><img src="african_face1_gray.jpg"></td>
+		<td><img src="gmm_results/african_face1_3.jpg"></td>
+		<td><img src="gmm_results/african_face1_5.jpg"></td>
+		<td><img src="gmm_results/african_face1_7.jpg"></td>
+	<!--	<td><img src="gmm_results/african_face1_11.jpg"></td> -->
+	<!--	<td><img src="gmm_results/african_face1_15.jpg"></td>-->
+	</tr>
+	
+	
+	<tr>
+		<td><img src="chinese_gray.jpg"></td>
+		<td><img src="gmm_results/chinese_3.jpg"></td>
+		<td><img src="gmm_results/chinese_5.jpg"></td>
+		<td><img src="gmm_results/chinese_7.jpg"></td>
+	<!--	<td><img src="gmm_results/chinese_11.jpg"></td> -->
+	<!--	<td><img src="gmm_results/chinese_15.jpg"></td> -->
+	</tr>
+	
+	</table>
+	
+
+		
+		</body>
+</html>

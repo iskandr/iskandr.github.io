@@ -1,0 +1,41 @@
+body { 
+  padding: 3em; 
+  padding-left: 5em;  
+  color: #333;
+  font: 100%/1.4 Georgia,serif;
+}
+
+dt { margin-bottom: 0.5em; font-weight:  bold;  }
+dd { margin-bottom: 1.5em;  margin-left: 1em; } 
+
+blockquote { 
+  margin: 0.2em; 
+  padding: 0.4em; 
+  border-left: 3px solid #555; 
+  /*font-style:italic; */ 
+}
+
+#content { width: 55em; }
+
+li { margin-bottom: 1em; }
+code { font-weight: bold; background-color: #eef;}
+pre { 
+    margin-bottom: 0.8em; 
+    margin-top: 0.5em; font-size:1.1em; 
+    background-color: #f3f3f3; 
+    border:1px solid #333; 
+    padding: 0.4em; 
+} 
+big { font-size: 1.4em; }
+#rightlink { float:right; }
+
+.comment { color: green; } 
+p { width: 48em; } 
+
+.gist {
+
+    font-size: 0.85em; 
+    width: 70em; 
+}
+
+.c1 { color: green; } 

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>The Dating Game</title>
+  <link rel="Stylesheet" href="text.css">
+	<style type="text/css">
+	body { font-size: 1.1em; }
+	code, pre { font-size: 1.2em; }
+	p { width: 90%; margin-top: 0em;  }
+	h2 { margin-bottom: 0.2em; }
+	sup { font-size: 0.8em; }
+	p sup {  vertical-align: top;}
+	ol { margin-bottom: 0.4em;  margin-top: 0.4em;}
+	
+	</style>
+  <!--[if IE]>
+  <link rel="Stylesheet" href="../iefix.css">
+  <style type="text/css">
+  #LOO { margin-top: 1em; }
+pre { font-size: 1.1em; }
+</style>
+  <![endif]-->
+  </head>
+  <body>
+  <div id="container">
+      <div class="left">November 12, 2008</div>
+      <div class="right"><a href="../">Alex Rubinsteyn</a></div>
+    <h1>Tips for Solving the Dating Game<br> (<em>or, a machine learning primer</em>)</h1>
+
+	<h2>The Problem</h2>
+	<p>In the <a href="http://www.cs.nyu.edu/courses/fall08/G22.2965-001/dating.html">dating game</a>, you play the role of a matchmaker trying to satisfy 
+a picky dater. Much like in real life, suitors (or suitresses) are reduced to a real-valued vector of <code>n</code> (&le; 100) features. Each element of the vector is in the range <code>[0..1]</code> and corresponds to some characteristic of the candidate. The picky dater (called "person" or <code>P</code> in the above link) judges the quality of each candidate based on an unknown weighting of their features. Each feature can be weighted positively or negatively (between <code>-1</code> and <code>1</code>) and we are guaranteed that the negative feature weights will sum to <code>-1</code> and the positive weights will sum to <code>1</code>. Additionally, we know that each weight will use no more than 2 decimal places, which I'll ignore for the rest of this page.</p>
+
+ <p>Initially, you are given <code>P</code>'s dating history in the form of <code>m</code> (&asymp; 20) feature vectors along with the score that <code>P</code> assigned to each vector. Formally, we can describe this as: </p>
+ <pre>
+		w &isin; [-1..1]<sup>n</sup> (<em>P's weight vector of length n</em>)
+		
+		&forall;w<sub>i</sub> &lt; 0 : <big>&sum;</big>w<sub>i</sub>  = -1
+		&forall;w<sub>j</sub> &gt; 0 : <big>&sum;</big>w<sub>j</sub>  = 1
+		
+		dating history = { x<sub>k</sub>, y<sub>k</sub> | 1 &le; k &le; m } 
+</pre>
+
+<p>
+ Your job is to generate an ideal match for <code>P</code>, which we'll call <code>x<sup>*</sup></code>, such that <code>w<sup>T</sup> &middot; x<sup>*</sup> = 1</code>. To do this, you will probably want to figure out the weighting function by which your candidates are being judged. If we approximate <code>w</code> using only the dating history we are first given, we are doing a type of function estimation called <a href="http://en.wikipedia.org/wiki/Linear_regression">linear regression</a>. Additionally, every candidate you submit (paired with the score you get back) can be used as evidence to refine your estimate of <code>w</code>. This puts us in an interesting <a href="http://en.wikipedia.org/wiki/Supervised_learning">machine learning</a> setting called <a href="http://www.ai.mit.edu/courses/6.867-f02/lectures/lecture-4.pdf">active learning</a> (an area of current research). Since I don't know of any canonical techniques for <a href="http://videolectures.net/mlss06tw_langford_aal/">active learning</a>, I'll leave that part to you. Instead, I'll focus on the easier problem: given some data, how do we derive the best linear model (ie, the optimal estimate of <code>w</code>). 
+</p>
+
+
+<h2>Loss and Optimization (<em>the story of life?</em>)</h2>
+<p>To find our optimal <code>w</code> (which we'll call <code>w</code><sup>*</sup> from now on), we need to pick a learning algorithm. Most machine learning algorithms boil down to different definitions of the following two concepts:</p>
+<ul>
+<li><strong>The Cost Function</strong>: Denoted <code>C(w)</code>, is the function that tells us how undesirable a particular weight vector is. The cost function consists of two parts:
+	<ol>
+		<li><em>The Loss Function</em> <code>L(w)</code> computes how well the weights predict the data we already have. </li>
+		<li><em>The Regularization Term</em> <code>R(w)</code> imposes some assumptions on what <code>w</code> should look like in order to improve performance on unseen data. Regularization terms are optional, but often helpful.</li>
+	</ol>
+</li>
+	
+<li><strong>The Optimization Method</strong>: Given a risk function, how do we go about finding the weights which result in minimum risk.</li>
+</ul>
+<p>
+In summary, to say that we have a "learning algorithm" means we have defined
+<pre>
+	C(w) = L(w) + R(w)	
+	optimize :: (sample data X, sample labels Y, cost function C) &rarr; best parameters
+</pre>
+	
+
+
+<h2>Ordinary Least Squares</h2>
+<p>
+The simplest cost function worth talking about is called  <a href="http://en.wikipedia.org/wiki/Mean_squared_error">mean squared error</a> (MSE). MSE ignores regularization and thus consists of just a loss function: the average squared difference between the value our estimate of <code>w</code> gives to each candidate and the value we know to be correct.  </p> 
+<pre>
+	C(w) = (1/m) * &sum;(x<sub>i</sub><sup>T</sup>&middot;w - y<sub>i</sub>)<sup>2</sup>
+	
+	<em>or in matrix form, where the rows of X are x<sub>i</sub> and Y is a column vector</em>
+	
+	C(w) = (1/m) * (Xw - Y)<sup>T</sup>(Xw - Y)
+</pre> 
+
+<p>
+Minimizing MSE for a linear system (of the form <code>Y = X&middot;w</code>) gives us <a href="http://en.wikipedia.org/wiki/Ordinary_least_squares">Ordinary Least Squares</a> (OLS) linear regression. 
+ <br>
+ OLS regression is appealing because it's arguably the simplest sort of optimization we can imagine doing. We don't have to differentiate anything and there's no iterative update process. Just a little bit of term shuffling and we'll have a solution. 
+<br>
+First, let's assume we have this desired <code>w</code><sup>*</sup> in hand. Let's further assume that it's a perfect fit, resulting in no error. 
+</p>
+
+<pre>
+	X &isin; <strong>R</strong><sup>m &times; n</sup>	<em>(previous candidates)</em>
+	Y &isin; <strong>R</strong><sup>m &times; 1</sup>	<em>(scores of previous candidates)</em>
+	w &isin; <strong>R</strong><sup>n &times; 1</sup>	<em>(picky dater's weights)</em>
+	
+	Xw<sup>*</sup> = Y
+	X<sup>T</sup>Xw<sup>*</sup> = X<sup>T</sup>Y 	<em>(multiply both sides by X<sup>T</sup>)</em>
+	w<sup>*</sup> = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>Y	<em>(multiply both sides by (X<sup>T</sup>X)<sup>-1</sup>)</em>
+</pre>
+
+<p>
+By algebraic magic, we now know how to calculate <code>w</code><sup>*</sup>. OK, good job guys. Can we go home? Well, not so fast. There's a few things worth noting here:</p>
+<ol>
+<li>The OLS derivation relies on taking a matrix inverse. Most languages don't come with built in linear algebra routines so you'll have to find an appropriate library. If you don't want to use such a library, you'll need to use a different optimization technique. </li>
+<li>The MSE cost function doesn't take into account any of the constraints we know the weight vector must obey. Perhaps a different cost function might perform better.</li>
+<li>In the presence of noise (which we luckily don't have in the Dating Game) or with an underconstrained linear system (which we probably will have) OLS can suffer from <a href="http://en.wikipedia.org/wiki/Overfitting">overfitting</a>, meaning it will give you no error on the candidates you've seen but might perform terribly on an new candidate. A regularization term could help improve performance.</li>
+</ol>
+
+</p>
+
+<h2>Changing the Optimization Algorithm</h2>
+<p>If we want to keep the same cost function (mean squared error) but ditch the matrices we can instead use gradient descent. The idea here is that at every value of <code>w</code> we choose, we can calculate the gradient of the loss function and then move down the gradient towards the minimum. To do this we, of course, have to actually figure out what the gradient looks like. To make the math a little easier, 
+let's drop the 1/m from in front of  <code>C(w)</code> and replace it with a <code>1/2</code>. Since constants won't affect the location of a minimum, this is kosher.</p>
+<pre>
+	C(w) = 1/2 * &sum;(x<sub>i</sub><sup>T</sup>&middot;w - y<sub>i</sub>)<sup>2</sup>
+	&nabla;C =  &sum;&nabla;C<sub>i</sub>
+	&nabla;C<sub>i</sub> = (x<sub>i</sub><sup>T</sup>&middot;w - y<sub>i</sub>)x<sub>i</sub>
+</pre>	
+<p>
+Now that we know how to calculate the gradient, we can initialize the weight vector <code>w<sub>0</sub></code> to some random value and proceed to iteratively refine that value. 
+</p>
+<pre>
+	Until some stopping condition 
+		G<sub>t</sub> = <em>vector of length n, initialized to all 0s</em>
+		foreach candidate c
+			dotprod = &sum;<sub>i</sub> x<sub>c,i</sub>*w<sub>t,i</sub>
+			diff = dotprod - y<sub>c</sub>
+			foreach gradient index i
+				G<sub>t,i</sub> =  G<sub>t,i</sub> + diff * x<sub>c,i</sub>
+		foreach weight index i
+			w<sub>t+1,i</sub> = w<sub>t,i</sub> - &eta;*G<sub>t,i</sub>
+</pre>
+<p>The two key decisions to make with the above algorithm are the stopping criterion and the learning rate (denoted &eta;). 
+<ul><li><strong>Stopping Criterion</strong>: You can choose to stop either at a sufficiently small error or when the magnitude of your updates to <code>w</code> starts to vanish. </li>
+<li><strong>Learning Rate</strong>:
+The learning rate ought to be a small value (somewhere between 0.00001 and 0.1) which is often determined using <a href="http://en.wikipedia.org/wiki/Cross_validation">cross validation</a>. Specifically, Leave One Out Cross Validation (described below) is best for small samples such as ours.</li>
+</ul>
+<p>The above gradient descent method is called "batch learning" since it aggregates the gradients from each candidate before updating the weights. A variant called "stochastic gradient descent" or "online learning" updates the weight vector using the individual gradient from each candidate. Stochastic gradient descent is often preferable for large samples and/or complicated cost surfaces. Since in the Dating Game we have neither, I can't see a reason to use the stochastic variant over the batch algorithm. For a more thorough explanation of gradient descent (both batch and stochastic), see this page on <a href="http://www.willamette.edu/~gorr/classes/cs449/linear2.html">Linear Neural Networks</a>. 
+
+<div id="LOO" style="border: 1px dashed #999; padding-left: 2em; width: 80%">
+<h3>Leave One Out Cross Validation</h3>
+<p> Here's a very simple algorithm for choosing the best learning rate (&eta;) to use with gradient descent.</p>
+<pre>
+	bestCost = &#8734;
+	bestEta = 0
+	foreach &eta; in eta_range
+		currCost = 0
+		foreach candidate i
+			w<sub>i</sub> = train(X without x<sub>i</sub>, Y without y<sub>i</sub>)
+			currCost = currCost + C(w<sub>i</sub>)
+		if currCost &lt; bestCost then 
+			bestLoss = currCost
+			bestEta = &eta;
+</pre>
+</div>
+<h2>Adding a Regularization Term</h2>
+<p>When trying to solve for parameters in an underconstrained or noisy system a smart thing to do is <a href="http://en.wikipedia.org/wiki/Regularization_(mathematics)">regularization</a>. Regularization imposes some soft constraints on your weight vector, it lets you express an assumption about what a good solution should look like. Actually, even with sufficient data, regularization turns out (for <a href="http://research.microsoft.com/~rherb/sparsity.htm">reasons</a> <a href="http://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html">too</a> <a href="http://www.autonlab.org/tutorials/vcdim.html">complicated</a> to discuss here) to be beneficial.
+</p> 
+<p>A common regularized form of linear regression is <a href="http://en.wikipedia.org/wiki/Ridge_regression">ridge regression</a>, which uses the cost function:
+<pre>
+	C(w) =  &sum;(x<sub>i</sub><sup>T</sup>&middot;w - y<sub>i</sub>)<sup>2</sup> + &alpha;&sum;w<sub>j</sub><sup>2</sup>
+</pre>
+You'll notice that the first term (the loss) is the same loss function we used in OLS regression. The regularization term (on the right) penalizes the norm of <code>w</code> and thus guides the algorithm to prefer smaller weights. In practice, this works quite well. The choice of a regularization term may seem arbitrary, but ridge regression can actually be <a href="RR_deriv.pdf">derived<a/> from some simple probabilistic assumptions. (<em>derivation care of <a href="http://sergeyfeldman.googlepages.com">Sergey Feldman</a></em>).</p>
+
+<h2>A Note on Support Vector Machines</h2>
+<href="http://en.wikipedia.org/wiki/Support_vector_machine">Support vector machines</a> have been something of a machine learning wunderkind for 10 or so years (ie, you might have heard of them). At first, they seem very intimidating and complicated. You might be relieved to discover that for linear systems (like the one we're dealing with in the dating game) SVMs are nothing more than the combination of a smart loss function (<a href="http://research.microsoft.com/~manik/projects/trade-off/hinge.html">hinge loss</a>), the same regularization term we use for ridge regression, and a quick optimization method (<a href="http://research.microsoft.com/~jplatt/smo.html">SMO</a>). That's it. In their usual form, however, an SVM wouldn't be a good fit for the Dating Game. SVMs generate classifiers which label each candiate as <code>+1</code> or <code>-1</code>. Since we're dealing with continuous values of <code>y<sub>i</sub></code>, a classifier wouldn't do us much good. You <em>can</em> do regression with an SVM variant, but it's definitely overkill for the Dating Game. 
+</p>
+
+<h2>More Info</h2>
+<ul>
+<li>Generalization, Overfitting, and Regularization: <a href="http://dis.unal.edu.co/~fgonza/courses/2007-I/ml/regularization.pdf">http://dis.unal.edu.co/~fgonza/courses/2007-I/ml/regularization.pdf</a></li>
+<li>Cross validation: <a href="http://www.autonlab.org/tutorials/overfit.html">http://www.autonlab.org/tutorials/overfit.html</a></li>
+<li>Estimating linear models with gradient descent: <a href="http://www.autonlab.org/tutorials/neural.html">http://www.autonlab.org/tutorials/neural.html</a></li>
+<li>Introductoin to regression: <a href="http://www.autonlab.org/tutorials/introreg.html">http://www.autonlab.org/tutorials/introreg.html</a></li>
+</ul>
+
+
+  </body></html>

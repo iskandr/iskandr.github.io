@@ -1,0 +1,77 @@
+#container 
+{
+	position: relative; 
+	border:1px solid #666; 
+	margin: 2em auto; 
+	width: 54em; 
+	padding:3em; 
+	background-color: white;
+}
+   
+#right 
+{
+			position: absolute; border-left: 1px solid #666;  
+            border-bottom: 1px solid #666; 
+            right: 0em; 
+            font-size: 1.2em; 
+            top: 0em;
+            padding: 0.5em;
+            background-color: #eee;
+}
+
+body 
+{ 
+	padding: 1em; 
+	background-color: #ccc;	
+}
+
+p 
+{ 
+	width: 44em; 
+	font-size: 1.1em; 
+	margin-bottom: 0em; 
+}
+
+h1 { font-size: 1.7em; }
+h2 { font-size: 1.5em; }
+
+h3 { 
+		margin-bottom: 0em; 
+		padding-bottom: 0em; 
+		font-size: 1.3em;  
+}
+
+code 
+{ 
+		background-color: #ecf3ff; 
+		border: 1px solid #666; 
+		display: block; 
+		padding: 1em; 
+		margin-top: 0.6em; 
+		width: 120%; 
+		white-space: pre;
+}
+
+.code 
+{
+		background-color: #ecf3ff; 
+		border: 1px solid #666; 
+		display: block; 
+		padding: 1em; 
+		margin-top: 0.6em;
+		font-size: 0.8em;   
+		white-space: pre;
+		font-family: monospace, sans-serif; 
+}
+
+table 
+{ 
+		border: 1px solid #333; 
+		width: 100%; 
+		margin-top: 1em; 
+}
+
+td, th { padding: 0.2em; text-align: center; font-family: sans-serif}
+tr { background-color: #eee; margin-top: 0.25em; margin-bottom: 0.25em; } 
+.example { background-color: #f6e988; white-space: pre; padding-top: 0em;}
+.comment { color: green; }

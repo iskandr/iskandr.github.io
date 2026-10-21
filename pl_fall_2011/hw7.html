@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Programming Languages (Fall 2011) - Homework 7 Solution</title>
+<link rel=StyleSheet href="pl.css" type="text/css" media=screen>
+<style  type="text/css">
+blockquote, blockquote code { background-color: #e9fae9; }
+</style>
+</head>
+<body>
+<div id="rightlink">
+<a href="http://cs.nyu.edu/courses/fall11/CSCI-GA.2110-001/">Programming Languages - Fall 2011</a>
+</div>
+<div id="content">
+<h1>Homework 7 Solution</h1>
+
+<blockquote>
+By using only constructors in pattern matching we could write four-line functions for the binary logical connectives which simply mimicked their truth tables. 
+By allowing variables in patterns the declarations could all be shorter. Write these shorter versions of conj, disj, impl and equiv.
+</blockquote>
+<br/>
+<script src="https://gist.github.com/1479118.js?file=logic.sml"></script>
+
+
+<blockquote>
+Would it be straightforward to rewrite the reduce function using local rather than let? What would be the difficulty?
+</blockquote>
+<p>
+It would be messier since <code>local</code> creates bindings but doesn't return a value. 
+</p>
+
+<blockquote>
+The semifactorial of a positive integer n is 1 &times; 3 &times; 5 &times; ... &times; n if n is odd and 2 &times; 4 &times; 6 &times; ... &times; n if n is even. Use the reduce function to define a semifac function which calculates semifactorials.
+</blockquote>
+<p>
+    <script src="https://gist.github.com/1479118.js?file=semifac.sml"></script>
+    This function works by transforming the numbers from 1 to n/2 into either
+    2*x if the original input was even or 2*x+1 if the original input was odd. 
+    All of the transformed numbers are multiplied together, yielding a
+    semifactorial.  
+</p>
+
+<blockquote>
+Which, if either, of the following are well defined?
+<ol>
+<li>compose (compose, uncurry compose)</li>
+<li>compose (uncurry compose, compose)</li>
+</ol>
+</blockquote>
+<p>
+In the context of a statically typed functional language "well defined" means roughly "will survive parsing and type checking." The second expression is definitely <em>not</em> well defined. If you 
+look at the types of 'uncurry compose' and 'compose' you'll see that they can't be plugged together. The first expression is more complex: it's technically well defined but causes the type checker
+to emit an error. This happens for reasons way beyond the scope of our class. If you're curious, you can read about ML's <a href='http://users.cs.fiu.edu/~smithg/cop4555/valrestr.html'>value restriction</a>. 
+</p>
+
+<blockquote>
+Use the predefined Standard ML version of function composition to define a function, iter', which behaves identically to the function iter given earlier.
+</blockquote>
+<p>
+<script src="https://gist.github.com/1479118.js?file=iter.sml"></script>
+Instead of directly applying x to the one argument function "iter (n-1) f", you first compose this function with f and then apply x. 
+</p>
+<blockquote>
+How would you define <code>exp1 andalso exp2</code> and <code>exp1 orelse exp2</code> in terms of exp1, exp2, conditional expressions and the constants <code>true</code> and <code>false</code>? 
+Try out your definitions against the expressions with the derived forms when exp1 is <code>true</code> and exp2 is <code>10 div 0 = 0</code>. Then change exp1 to <code>false</code> and compare again.
+</blockquote>
+
+<p>
+I think this question is confusingly worded. You <em>can't</em> define <a href="http://en.wikipedia.org/wiki/Short-circuit_evaluation">short-circuiting</a> logical operators from within SML. 
+<a href="http://en.wikipedia.org/wiki/Eager_evaluation">Eager evaluation</a> won't let you! What you <em>can</em> do is define logical operators which fully evaluate both their arguments before
+computing a result. These are just conjunction and disjunction functions from the first question. 
+</p>
+
+</div>
+</body>
+</html>
+

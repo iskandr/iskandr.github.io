@@ -1,23 +1,210 @@
----
-layout: default
----
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
 
-<div class="home">
+<html>
+<head>
+  <title>Alex Rubinsteyn</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <link rel="Stylesheet" href="style.css">
+  <!--[if IE]>
+	<link rel="Stylesheet" href="iefix.css">
+  <![endif]-->
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+      <img src='images/bear_logo.jpg' alt="logo" />
+    </div>
 
-  <h1 class="page-heading">Posts</h1>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+<!--
+<div id='nav'>
+    <ul>
+    </ul>
+</div>
+-->
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+<div id="main">
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+<div style="padding-top: 1em; font-size: 1.2em;">
+I'm an Assistant Professor of <a href="https://www.med.unc.edu/genetics/">Genetics</a> in the <a href="https://www.med.unc.edu/compmed/">Computational Medicine Program</a> and <a href="https://unclineberger.org/">Lineberger Cancer Center</a>
+at the University of North Carolina - Chapel Hill.
+
+<br/>
+<br/>
+
+I help run the <a href="https://pirl.unc.edu">Personalized Immunotherapy Research Lab</a> at UNC where we work on TCR therapeutics, T-cell epitope discovery, cancer genomics, machine learning for immunology, and making personalized cancer immunotherapies which actually do something useful.
+<br/>
+<br/>
+</div>
+<!--
+<div style="font-size:1.1em;">
+Previously: researcher in <a href="http://icahn.mssm.edu/">Mount Sinai</a>'s <a href="http://www.openvax.org/">OpenVax</a> group and <a href="https://www.nytimes.com/2015/03/08/technology/on-the-case-at-mount-sinai-its-dr-data.html?_r=0">Hammer Lab</a>.
+</div>
+
+-->
+<h1>Blogs</h1>
+<dl>
+  <dt><a href="https://pirlblog.substack.com">Personalized Immunotherapy Research Lab</a><dt>
+  <dd>My research lab at UNC Chapel Hill with posts about experimental and computational immunology, cancer genomics, and machine learning</dd>
+
+  <dt><a href="https://explainmydata.blogspot.com/">explain my data</a><dt>
+  <dd>Grad school era writings on machine learning and data analysis</dd>
+
+  <dt><a href="http://phi-node.blogspot.com">φ-node</a><dt>
+  <dd>My previous research life: translating programs into faster programs</dd>
+</dl>
+
+
+<h1>Teaching</h1>
+
+
+<dl>
+  <dt><a href="https://github.com/natalies-teaching/BCB726_Fall2025">Machine Learning for Computational Biology</a> <i>(Fall 2025, co-taught with <a href="https://cs.unc.edu/person/natalie-stanley/">Natalie Stanley</a>)</i></dt>
+  <dd>Introduction to machine learning from basic concepts to deep learning with a focus on predictions from biological data</dd>
+
+  <dt><a href="https://github.com/iskandr/bcb731">Defense Against The Dark Arts</a> <i>(Fall 2023)</i><dt>
+  <dd>Graduate survey of recurring statistical errors and pitfalls which are sometimes used to exaggerate the weight of evidence for novel biological claims or inflate the estimated accuracy of proposed predictive biomedical models. This course focuses on misapplied analyses of data sources where a small number of biological samples are quantified into very high dimensional feature spaces, such as in genomics, proteomics, and biomedical imaging.</dd>
+
+  <dt><a href="pl_fall_2011/recitation.html">Programming Languages Recitation</a> <i>(Fall 2011)</i></dt>
+  <dd>Recitation section for a graduate programming languages class, surveying both theoretical foundations of PL theory and brief forays into using many different languages.</dd>
+</dl>
+
+
+<h1>Writing &amp; Presentations</h1>
+<ul>
+   <li>
+   <a href="files/Machines-of-Loving-Hype-Sep-3-2025.pdf">Machines of Loving Hype: Let’s get specific about “curing cancer with AI”</a>
+   <br/>
+   <i>Presented at the Lunenfeld-Tanenbaum Research Institute (September 3rd, 2025)</i>
+   </li>
+
+   <li>
+   <a href="files/CIMT-2021.pdf">Neoantigens beyond SNVs: embracing the full spectrum of antigenic dark matter in tumors</a>
+   <br/>
+   <i>Presented at <a href="https://www.meeting.cimt.eu/">CIMT 2021</a> (May 12th, 2021)</i>
+   </li>
+    <li>
+       <a href="files/2020-09-14-Precision-vaccine-design-from-cancer-to-SARS-CoV-2-and-back.pdf">Precision vaccine design from cancer to SARS-CoV-2 and back</a>
+	<br />
+	<i>Presented at the <a href="https://unclineberger.org/">Lineberger Cancer Center</a> faculty lunch (September 14th, 2020)</i>
+    </li>
+    <li>
+       <a href="files/Personalized_Cancer_Vaccines_Literature_Review.pdf">Personalized Cancer Vaccines: Literature Review</a>
+       <br />
+       <i>Written for <a href="https://www.epivaxonco.com">Epivax Oncology</a> (January 2018)</i>
+    </li>
+    <li>
+       <a href="files/Data_Science_Salon_Feb_9_2018.pdf">Machine Learning for Personalized Cancer Vaccines</a>
+       <br />
+       <i>
+       Presented at <a href="https://datascience.salon/miami/">Data Science Salon - Miami</a> (February 9th, 2018)
+       </i>
+    </li>
+    <li>
+       <a href="files/musc_2017_03_27_personalized_cancer_vaccines.pdf">Personalized Cancer Vaccines: History, Preclinical Evidence, and Ongoing Trials</a>
+       <br/>
+       <i>
+        Presented at <a href="https://events.hcc.musc.edu/EventsDetails/TabId/146/ctl/ViewEvent/mid/510/OccuranceId/149/ReturnTabId/145/Default.aspx">Neoantigens &amp; Cancer Immunotherapy Symposium</a>
+        (March 27th, 2017)
+       </i>
+    </li>
+    <li>
+        <a href="files/um_ccs_2017_02_21_immunotherapy.pdf">Computational Tools for Cancer Neoantigens and Mount Sinai's Personalized Vaccine Trial</a>
+        <br/>
+        <i>Presented at the University of Miami's <a href="http://ccs.miami.edu/">Center for Computational Science</a> (February 27th, 2017)</i>
+    </li>
+    <li>
+       <a href="https://www.youtube.com/watch?v=E92jDCmJNek">Python Libraries for Deep Learning with Sequences</a>
+       <br/>
+        <i>Video from <a href="http://nyc2015.pydata.org/">PyData NYC 2015</a></i>
+    </li>
+    <li>
+        <a href="files/MSKCC-Cancer-Systems-Biology-2014.pdf">Personalized Cancer Vaccine Pipeline</a> <small>(pdf)</small>
+        <br/>
+        <i>Poster for <a href="https://ccsbsymposium.mskcc.org/Home.aspx">Systems Biology of Cancer Therapeutics Symposium</a> (October 27th, 2014)</i>
+    </li>
+    <li>
+        <a href="files/CudaTree-GTC.pdf">
+        CudaTree: Training Random Forests on the GPU
+        </a>
+        <br>
+        <i>GPU Technology Conference (March 25th, 2014)</i>
+    </li>
+    <li>
+        <a href="files/PyData_NYC_2013_Slides.pdf">Python on the GPU with Parakeet</a> <small></small>
+        <br/>
+        <i>Slides for PyData NYC (November 10th, 2013)</i>
+    </li>
+    <li>
+        <a href="files/parakeet_pydata_boston2013.pdf">Parakeet: A Runtime Compiler for Numerical Python</a> <small>(pdf)</small>
+        <br/>
+        <i>Slides for PyData Boston (July 27th, 2013)</i>
+    </li>
+    <li>
+        <a href="text/ocaml_links.html">Resources for Learning OCaml</a>
+        <i>(October 6th, 2011)</i>
+
+    <li>
+        <a href="text/dating.html">Tips for Solving the Dating Game (<em>or, a machine learning primer</em>)</a>
+        <i>(Nov. 12th, 2008)</i>
+    </li>
+    <!--
+    <li>
+        <a href="text/monoids.html">Monoids? In <em>my</em> programming language?</a>
+        <i>(Nov. 10th, 2008)</i>
+    </li>
+    -->
+
+    <li>
+        <a href="text/template_insanity.html">C++ Template Metaprogramming Insanity</a>
+            <i>(Nov. 10th, 2007)</i>
+    </li>
+
+</ul>
+
+
+<h1>Clinical Trials</h1>
+I helped start and run the PGV (personalized genomic vaccine) series of therapeutic cancer vaccine at Mount Sinai:
+<ul>
+        <li>
+                <a href="https://clinicaltrials.gov/ct2/show/NCT02721043">
+                Safety and Immunogenicity of Personalized Genomic Vaccine to Treat Malignancies
+                </a>
+        </li>
+        <li>
+                <a href="https://clinicaltrials.gov/ct2/show/NCT03223103">
+                Safety and Immunogenicity of Personalized Genomic Vaccine and Tumor Treating Fields (TTFields) to Treat Glioblastoma
+                </a>
+        </li>
+        <li>
+                <a href="https://clinicaltrials.gov/ct2/show/NCT03359239">
+                Atezolizumab Given in Combination With a Personalized Vaccine in Patients With Urothelial Cancer
+                </a>
+        </li>
+</ul>
+I am now at UNC helping create the next generation of personalized cancer immunotherapies at UNC, including novel TCR therapeutics as well as this personalized vaccine trial:
+<ul>
+	<li><a href="https://clinicaltrials.gov/ct2/show/NCT04266730">Trial of a Personalized and Adaptive Neoantigen Dose-Adjusted Vaccine Concurrently With Pembrolizumab (PANDA-VAC)</a></li>
+</ul>
+
+<h1>Art</h1>
+<dl>
+<dt><a href="https://www.punchcardcollective.com">punch.card.collective</a> (2021)</dt>
+<dd>Ongoing collaboration working on generative fiber arts and proto-computational pattern crafts</dd>
+
+<dt><a href="https://iskandr.github.io/weave">Weave</a> (2021)<dt>
+<dd>Early experiments in generating textile patterns and weaving drafts</dd>
+</dl>
+
+<dt><a href="comp_photo/texture">Texture Synthesis</a> (2013)</dt>
+<dd>An implementation of Efros &amp; Leung's texture synthesis algorithm in Matlab, and some aesthetically pleasing outputs.</dd>
+</dl>
+
 
 </div>
+</div>
+
+</body>
+</html>

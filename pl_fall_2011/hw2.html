@@ -1,0 +1,237 @@
+<html>
+<head>
+<title>Programming Languages (Fall 2011) - Homework 2 Solution</title>
+<link rel=StyleSheet href="pl.css" type="text/css" media=screen>
+</head>
+<body>
+<div id="rightlink">
+<a href="http://cs.nyu.edu/courses/fall11/CSCI-GA.2110-001/">Programming Languages - Fall 2011</a>
+</div>
+<div id="content">
+<h1>Homework 2 Solution</h1>
+<p>
+The biggest design decision that had to be made for this homework was which type of string you would use
+to represent your numbers. I chose to use Ada.String.Unbounded.Unbounded_String, which I imported into the main 
+namespace so I wouldn't have to type that repeatedly. A good alternative is to use bounded strings whose 
+lengths are dynamically computed at the top of each function. The least desirable solution is to hardcode a 
+single maximum length for all strings. What happens if a user supplies you an input longer than your string type? 
+Any code which used fixed-length strings should at least check for this error condition. 
+</p>
+<pre>
+<span class="comment">-- use unbounded strings as the representation of arbitrary length/base numbers</span>  
+with Ada.Strings.Unbounded;
+use Ada.Strings.Unbounded;
+with Ada.Strings.Unbounded.Text_IO;
+with Ada.Text_IO; 
+with Ada.Command_line; 
+with Ada.Assertions; 
+</pre>
+<pre>
+procedure hw2 is
+  <span class="comment">-- need this package to read unbounded strings from a file</span> 
+  package UIO renames Ada.Strings.Unbounded.Text_IO; 
+  <span class="comment">-- use Text_IO both for file reading and printing regular strings</span> 
+  package IO renames Ada.Text_IO; 
+  <span class="comment">-- need command_line to get filename</span> 
+  package CL renames Ada.Command_line; 
+
+</pre>
+<p>Some of the submissions had very long case statements mapping to/from every character and its numerical value. 
+It's way tidier to use <a href="http://rosettacode.org/wiki/Character_codes#Ada">Character'Pos and Character'Val</a> to convert between characters and their <a href="http://www.asciitable.com/">ASCII</a> values. </p>
+
+<pre>
+  <span class="comment">-- takes a number, returns an equivalent character</span>
+  <span class="comment">-- Character'Val maps ascii codes to character</span>
+  <span class="comment">-- Character'Pos maps characters to their ascii codes</span>
+  function Nat_to_Char(N : Natural) return Character is 
+  begin 
+    if N &lt;= 9 then return Character'Val(N + Character'Pos('0'));
+    else return Character'Val(N - 10 + Character'Pos('A')); 
+    end if; 
+  end Nat_to_Char; 
+</pre>
+<p> I created an exception 'Invalid_Character' which gets raised whenever a character of an input string is something other than '0'-'9' | 'a'-'f' | 'A' - 'F'. However you handle this sort of error, somewhere in your code you should be validating that all characters fall within the valid range. Further down there
+is additional verification that the value of each character doesn't exceed the base.</p>
+<pre>
+  <span class="comment">-- exception that gets raised on characters outside the '0'.. 'F' range</span>
+  Invalid_Character : exception;
+  <span class="comment">-- takes a character representing a number in base 16, returns its value</span>
+  function Char_to_Nat(C : Character) return Natural is 
+    Ascii_Code : Natural := Character'Pos(C);
+  begin 
+    case C is
+      when 'A' .. 'F' => return 10 + Ascii_Code - Character'Pos('A');
+      when 'a' .. 'f' => return 10 + Ascii_Code - Character'Pos('a');
+      when '0' .. '9' => return Ascii_Code - Character'Pos('0');
+      when others => raise Invalid_Character; 
+    end case; 
+  end Char_to_Nat;
+</pre>
+
+<p>My implementation of addition might differ slightly from your but the underlying logic should be similar. Traverse the two number strings from
+least to most significant digits, adding each digit pair and carrying any value greater than the base to the next position. </p>
+<pre>
+  
+  <span class="comment">-- indexes into strings from right to left</span>
+  <span class="comment">-- returning 0 if you go past the leftmost boundary</span> 
+  function Elem_to_Nat(S : Unbounded_String; Index : Positive) return Natural is 
+    RevIndex : Integer := Length(S) - Index + 1; 
+  begin 
+    if RevIndex > 0  then return Char_to_Nat(Element(S, RevIndex));
+    else return 0; 
+    end if;
+  end Elem_to_Nat;
+      
+  function Reverse_String(S : Unbounded_String) return Unbounded_String is
+    N : Natural := Length(S); 
+    Rev : Unbounded_String := S; 
+  begin 
+    for I in Positive Range 1 .. N loop 
+      Replace_Element(Rev, I, Element(S, N - I + 1)); 
+    end loop; 
+    return Rev; 
+  end Reverse_String; 
+  
+  <span class="comment">-- to add two arbitrary length integers, loop through the elements of</span>
+  <span class="comment">-- of strings, adding each pair of elements and carrying result/Base</span>
+  <span class="comment">-- to the next position</span>
+  function Add(X, Y : Unbounded_String; Base : Positive) return Unbounded_String is 
+    <span class="comment">-- Elem_Sum is where we stick the result of adding two single-digit numbers</span>
+    <span class="comment">-- may exceed the base so it will get split into one digit of the result and a carry</span>
+    Elem_Sum : Natural := 0;
+    Carry : Natural := 0;
+    Sum : Unbounded_String := Null_Unbounded_String;
+  begin 
+    <span class="comment">-- adds from least to most significant positions,</span> 
+    <span class="comment">-- appending to a result string in reverse</span>
+    for I in Positive range 1 .. Natural'Max(Length(X), Length(Y)) loop
+      Elem_Sum := Elem_To_Nat(X, I) + Elem_To_Nat(Y, I) + Carry;
+      Append(Sum, Nat_To_Char(Elem_Sum mod Base)); 
+      Carry := Elem_Sum / Base; 
+    end loop; 
+    <span class="comment">-- don't forget the last carry</span>
+    if Carry > 0 then Append(Sum, Nat_to_Char(Carry)); end if; 
+    <span class="comment">-- since we've been accumulating from right to left,</span> 
+    <span class="comment">-- now we reverse the Sum string to get our result</span> 
+    return Reverse_String(Sum); 
+  end Add; 
+</pre>
+
+<p>To multiply I add X to itself as many times as the value of Y. I implement this as recursion where 
+each subsequent recursive call gets a Y string 1 less in value. 
+I'm not totally happy with either this code or algorithm, email me if yours came out cleaner. </p>
+<pre>
+  Zero : Unbounded_String := To_Unbounded_String("0"); 
+  One : Unbounded_String := To_Unbounded_String("1"); 
+
+  <span class="comment">-- subtract 1 from the arbitrary length natural encoded as a string</span> 
+  function Sub1(X : Unbounded_String; Base : Natural) return Unbounded_String is
+    N : Natural := Length(X);
+    Result : Unbounded_String := X; 
+    CurrDigit : Natural; 
+  begin
+    if X = One then return Zero; end if; 
+    <span class="comment">-- scan from right to left until you find a non-zero position,</span> 
+    <span class="comment">-- then decrement it</span> 
+    for I in reverse 1 .. N loop
+       CurrDigit := Char_to_Nat(Element(X, I)); 
+       <span class="comment">-- if a digit is 0, we're going to borrow from further right</span> 
+       <span class="comment">-- and replace it with last single digit number</span> 
+       if CurrDigit = 0 then Replace_Element(Result, I, Nat_to_Char(Base-1));
+       elsif CurrDigit = 1 and I = 1 then Delete(Result, 1, 1); exit; 
+       else
+         <span class="comment">-- replace current character with char representation</span> 
+         <span class="comment">-- of the digit - 1</span>
+         Replace_Element(Result, I, Nat_to_Char(CurrDigit - 1)); 
+         exit; 
+       end if;
+    end loop; 
+    return result; 
+  end Sub1; 
+
+  <span class="comment">-- multiply by recursively adding X</span> 
+  <span class="comment">-- every recursive call takes a value of Y which is one smaller</span> 
+  function Mult(X, Y: Unbounded_String; Base : Positive) return Unbounded_String is
+  begin 
+    if Y = Zero or X = Zero then return Zero; 
+    elsif Y = One then return X;
+    else return Add(X, Mult(X, Sub1(Y, Base), Base), Base); 
+    end if; 
+  end Mult; 
+</pre>
+<p>No character's value in a string should exceed the base (for example, "023" is not a binary string). Something like this simple loop 
+should happen after each string gets loaded. 
+</p>
+<pre>
+  <span class="comment">-- check every character of a string to ensure that it is within the appropriate range</span> 
+  procedure Validate_Base(X : Unbounded_String; Base : Positive) is
+  begin 
+    for I in 1 .. Length(X) loop 
+      Ada.Assertions.Assert(Char_to_Nat(Element(X, I)) &lt; Base, "character greater than base");       
+    end loop; 
+   end Validate_Base; 
+  
+</pre>
+<p>The body of the main procedure should be easy to understand. The only exotic thing going is that I use the Command_line package to read in the input filename. Many of you hardcoded your the filename as something like "input.txt", which is fine. 
+</p>
+<pre>
+
+  File : IO.File_Type;
+  BaseStr : Unbounded_String := Null_Unbounded_String;
+  Base : Natural; 
+  X : Unbounded_String := Null_Unbounded_String; 
+  Y : Unbounded_String := Null_Unbounded_String; 
+
+begin
+   <span class="comment">-- make sure the filename has been given as a commandline arg</span>
+  Ada.Assertions.Assert(CL.Argument_Count /= 0, "file name not given"); 
+   <span class="comment">-- also assert that no additional args were given</span>
+  Ada.Assertions.Assert(CL.Argument_Count &lt; 2, "too many arguments"); 
+  IO.Put("Reading triplets from file: ");
+  IO.Put_Line(CL.Argument(1));
+  IO.Open (File => File, Mode => IO.In_File, Name => CL.Argument(1));
+                     
+   <span class="comment">-- loop through all triplets in the file</span>   
+  loop 
+    <span class="comment">-- read base</span> 
+    BaseStr := UIO.Get_Line(File);  
+    Base := Natural'Value(To_String(BaseStr));
+    Ada.Assertions.Assert(Base &lt;= 16, "invalid base"); 
+    exit when Base = 0; 
+     
+    <span class="comment">-- print "Base b"</span>
+    IO.Put("Base "); 
+    UIO.Put_Line(BaseStr); 
+	 
+    <span class="comment">-- read two numbers</span> 
+    X := UIO.Get_Line(File);
+    Y := UIO.Get_Line(File);
+
+     <span class="comment">-- ensure inputs are well formed</span> 
+    Validate_Base(X, Base); 
+    Validate_Base(Y, Base); 
+
+    <span class="comment">-- print "x + y = sum"</span> 
+    UIO.Put(X);
+    IO.Put(" + "); 
+    UIO.Put(Y); 
+    IO.Put(" = "); 	 
+    UIO.Put_Line(Add(X, Y, Base)); 
+
+    <span class="comment">-- print "x * y = product"</span>
+    UIO.Put(X);
+    IO.Put(" * "); 
+    UIO.Put(Y); 
+    IO.Put(" = "); 	 
+    UIO.Put_Line(Mult(X, Y, Base)); 
+
+    exit when IO.End_Of_File(File); 
+  end loop; 
+  IO.Close(File => File);
+end hw2;
+</pre>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,115 @@
+<html>
+<head>
+	<title>Computational Photography - Homework 1</title>
+</head>
+<style type="text/css">
+	* { 
+		font-family: Verdana, Arial, sans-serif;
+		color: #333; 
+    }    
+	html { padding: 1em;  }
+	h1 { text-align: center; }
+	h1, h2, h3 { clear: both;  }
+	h2 { text-decoration: underline; }
+	h3 { color: #533; }
+	.image { 
+		background-color: #eee;
+		float: left; 
+		padding: 1em;
+		padding-top: 0em;
+		margin-left: 1em;
+		margin-right: 2em;
+		margin-bottom: 1em;
+		
+	}
+	.image img { display: block; border: 1px solid #333; }
+	.image  .caption { 
+		font-size: 80%;
+        text-align: center; 
+		padding-bottom: 0.5em;
+		padding-top: 0.5em;
+	}
+	a, a:visited { color: blue; }
+</style>
+
+<body>
+	<h1>Computational Photography - Homework 1</h1>
+
+	<h2>RAW to JPEG conversion</h2>
+	Associated Matlab files: <a href="raw2jpg.m">raw2jpg.m</a>, <a href="demosaic.m">demosaic.m</a>, 
+	<a href="white_balance.m">white_balance.m</a>, <a href="gamma_correct.m">gamma_correct.m</a>, 
+	<a href="histoclip.m">histoclip.m</a>
+	<h3>Demosaicing</h3>
+		
+		<div class="image">
+			<div class="caption">Original raw image</div>
+			<img src="raw.jpg">
+		</div>
+		<div class="image">
+			<div class="caption">Demosaiced image</div>
+			<img src="rgb.jpg">
+		</div>
+		
+		<div class="image">
+			<div class="caption">Demosaiced image with 3x3 median filter</div>
+			<img src="rgb_med.jpg">
+		</div>
+	<h3>White Balancing</h3>
+			<div class="image">
+			<div class="caption">White balanced image</div>
+			<img src="white.jpg">
+			</div>
+	<h3>Gamma Correction</h3>
+	<div class="image">
+			<div class="caption">Gamma corrected image</div>
+			<img src="gamma.jpg">
+	</div>
+	<div class="image">
+			<div class="caption">Grayscale histogram</div>
+			<img src="gamma_hist.jpg">
+	</div>
+	<h3>Histogram Clipping</h3>
+	<div class="image">
+			<div class="caption">Clipped histogram</div>
+			<img src="final.jpg">
+	</div>	
+	<div class="image">
+			<div class="caption">Grayscale histogram of final image</div>
+			<img src="final_hist.jpg">
+	</div>	
+	<h2>Inferring the tone response curve</h2>
+	Matlab file: <a href="tonemap.m">tonemap.m</a>
+	<h3>Response curves</h3>
+	
+	<div class="image">
+	<div class="caption">Red</div>
+	<img src="hdr_red.jpg">
+	</div>
+	
+	<div class="image">
+	<div class="caption">Green</div>
+	<img src="hdr_green.jpg">
+	</div>
+	
+	<div class="image">
+	<div class="caption">Blue</div>
+	<img src="hdr_blue.jpg">
+	</div>
+	
+	<h3>Gamma corrected response curves</h3>
+		<div class="image">
+	<div class="caption">Red</div>
+	<img src="hdr_red_gamma.jpg">
+	</div>
+	
+	<div class="image">
+	<div class="caption">Green</div>
+	<img src="hdr_green_gamma.jpg">
+	</div>
+	
+	<div class="image">
+	<div class="caption">Blue</div>
+	<img src="hdr_blue_gamma.jpg">
+	</div>
+</body>
+</html>
